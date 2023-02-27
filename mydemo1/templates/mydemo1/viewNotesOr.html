@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}View Note{% endblock title %} {% block viewNotesOr %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Notes</title>
-</head>
-
-<body>
+<div>
     <h1>View all Notes</h1>
     <table border="1">
         <tr>
@@ -51,10 +43,11 @@
             </td>
             <td>
                 <a href="{%url 'visitNote' pk=i.0%}">Open</a>
+                <a href="{%url 'addUploaderOr' pk=i.0%}">Add Uploader</a>
+                <a href="{%url 'addPhotosNo' pk=i.0%}">Add Photos</a>
             </td>
         </tr>
         {%endfor%}
     </table>
-</body>
-
-</html>
+</div>
+{%endblock viewNotesOr%}

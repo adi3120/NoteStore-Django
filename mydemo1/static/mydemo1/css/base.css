@@ -1,0 +1,17 @@
+/* * {
+	border: 1px dashed black;
+} */
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1em;
+}
+
+.right {
+    width: 25%;
+    display: flex;
+    justify-content: space-around;
+    font-size: larger;
+}

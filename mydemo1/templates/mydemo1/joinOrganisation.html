@@ -1,63 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Join Organisation{% endblock title %} {% block joinOrganisation %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Organisation</title>
-</head>
 
-<body>
+<h1>All Organisations</h1>
+<table border="1">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Admin ID
+        </th>
+        <th>
+            Admin First Name
+        </th>
+        <th>
+            Admin Last Name
+        </th>
+        <th>
+            Admin Email Address
+        </th>
+    </tr>
+    {%for i in final%}
 
-    <h1>All Organisations</h1>
-    <table border="1">
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                Admin ID
-            </th>
-            <th>
-                Admin First Name
-            </th>
-            <th>
-                Admin Last Name
-            </th>
-            <th>
-                Admin Email Address
-            </th>
-        </tr>
-        {%for i in final%}
+    <tr>
+        <td>
+            {{i.0}}
+        </td>
+        <td>
+            {{i.1}}
+        </td>
+        <td>
+            {{i.2}}
+        </td>
+        <td>
+            {{i.4}}
+        </td>
+        <td>
+            {{i.5}}
+        </td>
+        <td>
+            {{i.6}}
+        </td>
+    </tr>
 
-        <tr>
-            <td>
-                {{i.0}}
-            </td>
-            <td>
-                {{i.1}}
-            </td>
-            <td>
-                {{i.2}}
-            </td>
-            <td>
-                {{i.4}}
-            </td>
-            <td>
-                {{i.5}}
-            </td>
-            <td>
-                {{i.6}}
-            </td>
-        </tr>
+    {%endfor%}
+</table>
 
-        {%endfor%}
-    </table>
-
-</body>
-
-</html>
+{%endblock joinOrganisation%}

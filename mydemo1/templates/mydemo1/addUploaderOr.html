@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Add Uploader{% endblock title %} {% block addUploaderOr %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Uploader</title>
-</head>
+<div>
+    <form action="#" method="post">
+        {% csrf_token %} {% load static %}
+        <center>
+            <div class="container">
 
-<body>
-
-</body>
-
-</html>
+                <label for='user_id'><b>User ID : </b></label>
+                <input type='number' placeholder="Enter user id to add" name='user_id' required><br>
+                <button type="submit"><b>Make Uploader</b></button><br>
+            </div>
+        </center>
+    </form>
+</div>
+{%endblock addUploaderOr%}

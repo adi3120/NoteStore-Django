@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+ {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Home{% endblock title %} {% block home %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteStore | Home</title>
-</head>
+<div class="main">
 
-<body>
-    <h1>NoteStore</h1>
-    <a href="http://">Home</a>
-    <a href="http://localhost:8000/signup">Signup</a>
-    <a href="http://localhost:8000/login">Login</a>
+    <div class="mainLeft">
+        <h1>
+            <span style="color:blue;">Organising</span> your <span style="color:rgb(255, 136, 0);">notes</span>
+        </h1>
+        <h1>
+            has never been
+        </h1>
+        <h1>
+            <span style="color:blue;">easier</span>
+        </h1>
+    </div>
+    <div class="mainRight">
+        <img src="https://www.integrationworx.com/sites/default/files/styles/webp/public/glazed-cms-media/mdm_pic_1.png.webp?itok=pF5JzprA&fid=1747" alt="">
+    </div>
+</div>
 
-</body>
-
-</html>
+{%endblock home%}

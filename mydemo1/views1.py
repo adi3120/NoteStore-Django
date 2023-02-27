@@ -27,7 +27,7 @@ pwd=''
 def signup(request):
     global fn,ln,s,em,pwd
     if request.method=="POST":
-        m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+        m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
         cursor=m.cursor()
         d=request.POST
         for key,value in d.items():
@@ -53,7 +53,7 @@ pwd=''
 def login(request):
     global em,pwd
     if request.method=="POST":
-        m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+        m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
         cursor=m.cursor()
         d=request.POST
         for key,value in d.items():
@@ -77,7 +77,7 @@ def login(request):
 
 def createorganisation(request):
 	if request.method=="POST":
-		m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+		m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 		cursor=m.cursor()
 		global name
 		global admin_id
@@ -86,43 +86,54 @@ def createorganisation(request):
 			if key=="org_name":
 				name=value
 
+		print(name,admin_id)
 
-		c="insert into organisation(name,owner_id) Values('{}','{}')".format(name,admin_id)
-		cursor.execute(c)
-		m.commit()
-		c="select id from organisation where name=%s and owner_id=%s"
-		vals=(name,admin_id)
-		cursor.execute(c,vals)
-		orgid=cursor.fetchall()
-		orgid=orgid[0][0]
-		c="insert into user_org(userid,orgid) Values('{}','{}')".format(admin_id,orgid)
+		c="insert into organisation(name,admin_id) Values('{}','{}')".format(name,admin_id)
 		cursor.execute(c)
 		m.commit()
 
 
 	return render(request,'mydemo1/createOrganisation.html')
 
+
+def joinorganisation(request):
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
+	cursor=m.cursor()
+	c="select * from organisation,user where organisation.admin_id=user.id"
+	cursor.execute(c)
+	final=cursor.fetchall()
+
+	context={
+		'final':final
+	}
+	
+	return render(request,'mydemo1/joinOrganisation.html',context=context)
+
 def myorganisation(request):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 	global admin_id
 
-	c="select * from organisation where id in(select orgid from user_org where userid="+str(admin_id)+")"
-	print(c)
+	c="select * from user_organisation where user_id="+str(admin_id)
 	cursor.execute(c)
 	a=cursor.fetchall()
-	print(a)
+	organisations=[]
+	for i in a:
+		c="select * from organisation where id="+str(i[1])
+		cursor.execute(c)
+		organisations.append(cursor.fetchall()[0])
+	print(organisations)
 	context={
-		'or':a
+		'or':organisations
 	}
 
 	return render(request,'mydemo1/myorganisation.html',context=context)
 
 def madeorganisation(request):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 	global admin_id
-	c="select * from organisation where owner_id="+str(admin_id)
+	c="select * from organisation where admin_id="+str(admin_id)
 	cursor.execute(c)
 	a=cursor.fetchall()
 	context={
@@ -131,35 +142,13 @@ def madeorganisation(request):
 	return render(request,'mydemo1/madeorganisation.html',context=context)
 
 
-def addUserOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
-	cursor=m.cursor()
-	if request.method=="POST":
-		d=request.POST
-		for key,value in d.items():
-			if(key=="user_id"):
-				c="insert into user_org values(%s,%s)"
-				print(c)
-				vals=(value,pk)
-				cursor.execute(c,vals)
-				m.commit()
-	return render(request,'mydemo1/addUserOr.html')
+def addUserOr(request):
 
-def addUploaderOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
-	cursor=m.cursor()
-	if request.method=="POST":
-		d=request.POST
-		for key,value in d.items():
-			if(key=="user_id"):
-				c="insert into note_uploader values(%s,%s)"
-				print(c)
-				vals=(pk,value)
-				cursor.execute(c,vals)
-				m.commit()
+	return render(request,'mydemo1/addUserOr.html')
+def addUploaderOr(request):
 	return render(request,'mydemo1/addUploaderOr.html')
 def renameOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 	if request.method=="POST":
 		d=request.POST
@@ -181,7 +170,7 @@ def renameOr(request,pk):
 	return render(request,'mydemo1/renameOr.html',context=context)
 
 def deleteOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 
 	c="delete from organisation where id="+str(pk)
@@ -191,27 +180,16 @@ def deleteOr(request,pk):
 
 
 def uploadNotesOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 	file_name=""
 	global admin_id
-	c="select count(*) from organisation where id=%s and owner_id=%s"
-	vals=(pk,admin_id)
-	cursor.execute(c,vals)
-	isuploader=cursor.fetchall()
-	print(isuploader)
-	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html')
-	
-
-	
 
 	if request.method=="POST":
 		d=request.POST
 		for key,value in d.items():
 			if key=="note_name":
 				note_name=value
-		
 		files=request.FILES
 
 		images=files.getlist('upload')
@@ -221,12 +199,8 @@ def uploadNotesOr(request,pk):
 		vals=(note_name,datetime_current,admin_id,pk)
 		cursor.execute(c,vals)
 		m.commit()
-		print("OK DONE")
-		vals=(note_name,admin_id,pk)
-		cursor.execute("select id from note where title=%s and user_id=%s and org_id=%s",vals)
-		
+		cursor.execute("select id from note where title='{}' and user_id={} and org_id={}".format(note_name,admin_id,pk))
 		note_id=cursor.fetchall()
-		print(note_id)
 		note_id=note_id[0][0]
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
@@ -241,55 +215,11 @@ def uploadNotesOr(request,pk):
 			m.commit()
 	return render(request,'mydemo1/uploadNotesOr.html')
 
-def addPhotosNo(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
-	cursor=m.cursor()
-	file_name=""
-	global admin_id
-	print(admin_id)
-	print(pk)
-	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
-	vals=(admin_id,pk)
-	cursor.execute(c,vals)
-	isuploader=cursor.fetchall()
-	print(isuploader)
-	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html')
-	if request.method=="POST":
-		d=request.POST
-		
-		files=request.FILES
-
-		images=files.getlist('upload')
-
-		datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
-
-		
-		note_id=pk
-		for img in images:
-			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
-
-			image=img.read()
-
-			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
-			
-			vals=("PIC1.jpeg",datetime_current,pk,admin_id,note_id,image)
-
-			cursor.execute(c,vals)
-			m.commit()
-	context={
-		"note":pk,
-	}
-	return render(request,'mydemo1/addPhotosNo.html',context=context)
-
-
-	
-
 def viewNotesOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 
-	c="select * from note,user where note.user_id=user.id and note.org_id="+str(pk)
+	c="select * from note,user where note.user_id=user.id"
 	cursor.execute(c)
 	final=cursor.fetchall()
 	context={
@@ -300,7 +230,7 @@ def viewNotesOr(request,pk):
 
 
 def visitNote(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='testing')
 	cursor=m.cursor()
 
 	c="select photo.data,photo.id,photo.name,photo.date_time,photo.org_id,organisation.name,photo.user_id,photo.note_id,note.title,user.email from  photo,note,user,organisation where photo.note_id=note.id and photo.user_id=user.id and photo.org_id=organisation.id and note.id="+str(pk)

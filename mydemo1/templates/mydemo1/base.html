@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteStore | {%block title%} {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'mydemo1/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/home.css' %}">
+</head>
+
+<body>
+    <div class="nav">
+        <div class="left">
+            <h1>NoteStore</h1>
+        </div>
+        <div class="right">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+
+    </div>
+
+    <div>
+        {% block profile_welcome %} {% endblock profile_welcome %}
+    </div>
+    <div>
+        {% block home %} {% endblock home %}
+    </div>
+    <div>
+        {% block addPhotoNo %} {%endblock addPhotoNo%}
+    </div>
+    <div>
+        {% block addUploaderOr %} {%endblock addUploaderOr%}
+    </div>
+    <div>
+        {% block addUserOr %} {%endblock addUserOr%}
+    </div>
+    <div>
+        {% block createOrganisation %} {%endblock createOrganisation%}
+    </div>
+    <div>
+        {% block error %} {%endblock error%}
+    </div>
+    <div>
+        {% block joinOrganisation %} {%endblock joinOrganisation%}
+    </div>
+    <div>
+        {% block login %} {%endblock login%}
+    </div>
+    <div>
+        {% block madeorganisation %} {%endblock madeorganisation%}
+    </div>
+    <div>
+        {% block myorganisation %} {%endblock myorganisation%}
+    </div>
+    <div>
+        {% block nottheuploader %} {%endblock nottheuploader%}
+    </div>
+    <div>
+        {% block renameOr %} {%endblock renameOr%}
+    </div>
+    <div>
+        {% block signup %} {%endblock signup%}
+    </div>
+    <div>
+        {% block uploadNotesOr %} {%endblock uploadNotesOr%}
+    </div>
+    <div>
+        {% block viewNotesOr %} {%endblock viewNotesOr%}
+    </div>
+    <div>
+        {% block visitNote %} {%endblock visitNote%}
+    </div>
+
+</body>
+
+</html>

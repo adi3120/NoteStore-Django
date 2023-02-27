@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Organisations Created By Me{% endblock title %} {% block madeorganisation %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organisations by me</title>
-</head>
-
-<body>
+<div>
     <h1>Organisations i created</h1>
     <table border="1">
         <tr>
@@ -31,10 +23,9 @@
                 {{i.2}}
             </td>
             <td>
-                <a href="http://localhost:8000/addUserOr">Add Users</a>
-                <a href="http://localhost:8000/addUploaderOr">Add Uploader</a>
-                <a href="http://localhost:8000/renameOr">Rename</a>
-                <a href="http://localhost:8000/updateOr">Delete</a>
+                <a href="{%url 'addUserOr' pk=i.0%}">Add Users</a>
+                <a href="{%url 'renameOr' pk=i.0%}">Rename</a>
+                <a href="{%url 'deleteOr' pk=i.0%}">Delete</a>
                 <a href="{%url 'viewNotesOr' pk=i.0%}">View all Notes</a>
                 <a href="{%url 'uploadNotesOr' pk=i.0%}">Create New Note</a>
 
@@ -45,6 +36,5 @@
 
         {%endfor%}
     </table>
-</body>
-
-</html>
+</div>
+{%endblock madeorganisation%}

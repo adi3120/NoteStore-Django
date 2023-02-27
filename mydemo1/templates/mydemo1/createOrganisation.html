@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Create Organisation{% endblock title %} {% block createOrganisation %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Organisation</title>
-</head>
-
-<body>
+<div>
     <form action="#" method="post">
         {% csrf_token %} {% load static %}
         <center>
@@ -20,6 +12,6 @@
             </div>
         </center>
     </form>
-</body>
+</div>
 
-</html>
+{%endblock createOrganisation%}
