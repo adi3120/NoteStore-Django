@@ -1,17 +1,16 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Create Organisation{% endblock title %} {% block createOrganisation %}
 
-<div>
-    <form action="#" method="post">
-        {% csrf_token %} {% load static %}
-        <center>
+<div class="createorgouter">
+    <h1>Create New Organisation</h1>
+    <div class="createorgmain">
+        <form action="#" method="post">
+            {% csrf_token %} {% load static %}
             <div class="container">
 
-                <label for='org_name'><b>Name : </b></label>
                 <input type='text' placeholder="Enter your Organisation name" name='org_name' required><br>
                 <button type="submit"><b>Create</b></button><br>
             </div>
-        </center>
-    </form>
+        </form>
+    </div>
 </div>
-
 {%endblock createOrganisation%}

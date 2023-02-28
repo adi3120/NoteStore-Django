@@ -9,6 +9,12 @@
     <title>NoteStore | {%block title%} {% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'mydemo1/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/welcome.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/createorg.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/madeorg.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/viewnotes.css' %}">
 </head>
 
 <body>
@@ -17,9 +23,9 @@
             <h1>NoteStore</h1>
         </div>
         <div class="right">
-            <a href="{% url 'index' %}">Home</a>
-            <a href="{% url 'signup' %}">Signup</a>
-            <a href="{% url 'login' %}">Login</a>
+            <b><a href="{% url 'index' %}">Home</a></b>
+            <b><a href="{% url 'signup' %}">Signup</a></b>
+            <b><a href="{% url 'login' %}">Login</a></b>
         </div>
 
     </div>

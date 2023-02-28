@@ -1,40 +1,40 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Organisations Created By Me{% endblock title %} {% block madeorganisation %}
 
-<div>
+<div class="madeorgouter">
     <h1>Organisations i created</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Admin ID</th>
-            <th>Options</th>
-        </tr>
-
+    <div class="madeorgmain">
         {%for i in a%}
-        <tr id={{i.0}}>
-            <td>
-                {{i.0}}
-            </td>
-            <td>
-                {{i.1}}
-            </td>
+        <div id={{i.0}} class="item">
+            <div class="itemimage">
+                <img src="{%static 'mydemo1/images/org_item.png'%}" alt="">
+            </div>
+            <div class="itemtext">
+                <div>
+                    <center>
+                        <h3>{{i.1}}</h3>
+                    </center>
+                </div>
+                <div>
+                    ID: {{i.0}}
+                </div>
 
-            <td>
-                {{i.2}}
-            </td>
-            <td>
-                <a href="{%url 'addUserOr' pk=i.0%}">Add Users</a>
-                <a href="{%url 'renameOr' pk=i.0%}">Rename</a>
-                <a href="{%url 'deleteOr' pk=i.0%}">Delete</a>
-                <a href="{%url 'viewNotesOr' pk=i.0%}">View all Notes</a>
-                <a href="{%url 'uploadNotesOr' pk=i.0%}">Create New Note</a>
+                <div>
+                    Admin ID: {{i.2}}
+                </div>
+                <div class="options">
+                    <a href="{%url 'addUserOr' pk=i.0%}">Add Users</a>
+                    <a href="{%url 'renameOr' pk=i.0%}">Rename</a>
+                    <a href="{%url 'viewNotesOr' pk=i.0%}">View all Notes</a>
+                    <a href="{%url 'uploadNotesOr' pk=i.0%}">Create New Note</a>
+                    <a id="del" href="{%url 'deleteOr' pk=i.0%}">Delete organisation</a>
 
-            </td>
+                </div>
+            </div>
 
-        </tr>
+        </div>
 
 
         {%endfor%}
-    </table>
+    </div>
 </div>
 {%endblock madeorganisation%}

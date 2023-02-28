@@ -1,53 +1,46 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}View Note{% endblock title %} {% block viewNotesOr %}
 
-<div>
+<div class="viewnotesouter">
     <h1>View all Notes</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Upload date and time</th>
-            <th>Uploader ID</th>
-            <th>Organisation ID</th>
-            <th>Uploader First name</th>
-            <th>Uploader Last name</th>
-            <th>Uploader email</th>
-            <th>Action</th>
-        </tr>
+    <div class="viewnotesmain">
 
         {%for i in final%}
-        <tr>
-            <td>
-                {{i.0}}
-            </td>
-            <td>
-                {{i.1}}
-            </td>
-            <td>
-                {{i.2}}
-            </td>
-            <td>
-                {{i.3}}
-            </td>
-            <td>
-                {{i.4}}
-            </td>
-            <td>
-                {{i.6}}
-            </td>
-            <td>
-                {{i.7}}
-            </td>
-            <td>
-                {{i.8}}
-            </td>
-            <td>
+        <div class="item">
+            <div class="itemlogo">
+                <img src="{%static 'mydemo1/images/note_logo.png'%}" alt="">
+            </div>
+            <div class="itemtext">
+                <div>
+                    <center>
+                        <h2>{{i.1}}</h2>
+                    </center>
+                </div>
+                <div>
+                    ID: {{i.0}}
+                </div>
+                <div>
+                    Upload date and time: {{i.2}}
+                </div>
+                <div>
+                    Uploader ID: {{i.3}}
+                </div>
+                <div>
+                    Organisation ID: {{i.4}}
+                </div>
+                <div>
+                    Uploader: {{i.6}} {{i.7}}
+                </div>
+                <div>
+                    Uploader email: {{i.8}}
+                </div>
+            </div>
+            <div class="action">
                 <a href="{%url 'visitNote' pk=i.0%}">Open</a>
                 <a href="{%url 'addUploaderOr' pk=i.0%}">Add Uploader</a>
                 <a href="{%url 'addPhotosNo' pk=i.0%}">Add Photos</a>
-            </td>
-        </tr>
+            </div>
+        </div>
         {%endfor%}
-    </table>
+    </div>
 </div>
 {%endblock viewNotesOr%}

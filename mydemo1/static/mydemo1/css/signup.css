@@ -1,57 +1,44 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
+.outerregister {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    flex-direction: column;
+}
+
+.registermain {
     background-color: white;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1em;
 }
 
-button {
-    background-color: #4CAF50;
-    width: 25%;
-    padding: 15px;
-    color: black;
-    border: none;
-    float: center;
-    font-size: 15px;
+.registermain form {
+    padding: 1em;
 }
 
-label {
-    font-size: 20px;
+.registermain form * {
+    padding-bottom: 1em;
 }
 
-form {
-    border: 3px solid #f1f1f1;
+.outerregister * {
+    font-size: 1.1em;
 }
 
-input[type=email],
-input[type=text] {
-    width: 50%;
-    font-size: 15px;
-    margin: 8px 0px;
-    padding: 12px 20px;
-    display: inline-block;
-    border: 2px solid green;
-    box-sizing: border-box;
+.outerregister h1 {
+    font-size: 2.1em;
 }
 
-input[type=radio] {
-    height: 18px;
-    width: 18px;
-}
-
-button:hover {
-    opacity: 0.7;
-}
-
-.container {
-    padding: 50px;
-    background-color: white;
-}
-
-.imgcontainer {
+.outerregister .registermain form .container button {
+    width: 100%;
     text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-img.avatar {
-    width: 10%;
-    border-radius: 50%;
+    padding: 0.5em;
+    background-color: blue;
+    font-size: medium;
+    color: white;
 }

@@ -1,0 +1,38 @@
+.welcomemain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3em;
+}
+
+.welcomemain .logotext .logoimg {
+    width: 100%;
+}
+
+.welcomemain .logotext .logoimg img {
+    height: 20em;
+    width: auto;
+}
+
+.logotext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 1em;
+}
+
+.logoimg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logotext a {
+    font-size: larger;
+    font-weight: 700;
+}

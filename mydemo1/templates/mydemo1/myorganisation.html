@@ -1,31 +1,34 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Organisations I'm Part of{% endblock title %} {% block myorganisation %}
 
-<div>
-    <h1>Organisations im part of</h1>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Admin ID</th>
-            <th>Actions</th>
-        </tr>
+<div class="madeorgouter">
+    <h1>Organisations i'm part of</h1>
+    <div class="madeorgmain">
         {%for i in or%}
-        <tr>
-            <td>
-                {{i.0}}
-            </td>
-            <td>
-                {{i.1}}
-            </td>
-            <td>
-                {{i.2}}
-            </td>
-            <td>
-                <a href="{%url 'viewNotesOr' pk=i.0%}">View all Notes</a>
-                <a href="{%url 'uploadNotesOr' pk=i.0%}">Create New Note</a>
-            </td>
-        </tr>
+        <div id={{i.0}} class="item">
+            <div class="itemimage">
+                <img src="{%static 'mydemo1/images/org_item.png'%}" alt="">
+            </div>
+            <div class="itemtext">
+                <div>
+                    <center>
+                        <h3>{{i.1}}</h3>
+                    </center>
+                </div>
+                <div>
+                    ID: {{i.0}}
+                </div>
+
+                <div>
+                    Admin ID: {{i.2}}
+                </div>
+                <div class="options">
+                    <a href="{%url 'viewNotesOr' pk=i.0%}">View all Notes</a>
+                    <a href="{%url 'uploadNotesOr' pk=i.0%}">Create New Note</a>
+                </div>
+            </div>
+
+        </div>
         {%endfor%}
-    </table>
+    </div>
 </div>
 {%endblock myorganisation%}

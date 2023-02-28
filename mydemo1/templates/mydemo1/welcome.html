@@ -1,14 +1,41 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Profile{% endblock title %} {% block profile_welcome %}
 
-<div>
+<div class="outerwelcome">
     <center>
-        <h1>Welcome :-) {{fname}} {{lname}}
-        </h1>
-    </center>
+        <h1>Welcome {{fname}} {{lname}}</center>
+    </h1>
+    <div class="welcomemain">
 
-    <a href="http://localhost:8000/createorganisation">Create An Organisation</a><br>
-    <!-- <a href="http://localhost:8000/joinorganisation">Join An Organisation</a><br> -->
-    <a href="http://localhost:8000/madeorganisation">Organisations by Me</a><br>
-    <a href="http://localhost:8000/myorganisation">Organisations I'm in</a><br>
+        <a href="http://localhost:8000/createorganisation">
+            <div class="logotext">
+                <div class="logoimg">
+                    <img src="{%static 'mydemo1/images/create_org.png' %}" alt="">
+
+                </div>
+                <h2>Create An Organisation</h2><br>
+            </div>
+        </a>
+        <a href="http://localhost:8000/madeorganisation">
+            <div class="logotext">
+
+                <div class="logoimg">
+                    <img src="{%static 'mydemo1/images/madeorg.png' %}" alt="">
+
+                </div>
+                <h2>Organisations by Me</h2><br>
+            </div>
+        </a>
+        <a href="http://localhost:8000/myorganisation">
+            <div class="logotext">
+
+                <div class="logoimg">
+                    <img src="{%static 'mydemo1/images/myorg.png' %}" alt="">
+
+                </div>
+                <h2>Organisations I'm in</h2><br>
+            </div>
+        </a>
+        <!-- <a href="http://localhost:8000/joinorganisation">Join An Organisation</a><br> -->
+    </div>
 </div>
 {%endblock profile_welcome%}

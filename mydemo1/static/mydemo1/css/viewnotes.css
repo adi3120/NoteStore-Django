@@ -1,0 +1,44 @@
+.viewnotesouter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.viewnotesmain {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4em;
+    margin-top: 3em;
+}
+
+.viewnotesmain .item .action {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2em;
+    margin-top: 2em;
+}
+
+.viewnotesmain .item .itemlogo img {
+    height: 15em;
+    width: auto;
+}
+
+.viewnotesmain .item {
+    box-shadow: rgba(0, 0, 0, 0.609) 0px 5px 15px;
+    padding: 1em;
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 1em;
+}
+
+.viewnotesmain .item .action a {
+    background-color: blue;
+    color: white;
+    border-radius: 0.5em;
+    text-align: center;
+    padding: 0.5em;
+}

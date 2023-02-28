@@ -1,0 +1,59 @@
+.madeorgmain {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-top: 3em;
+    gap: 4em;
+}
+
+.madeorgmain .item {
+    box-shadow: rgba(0, 0, 0, 0.609) 0px 5px 15px;
+    border-radius: 1em;
+}
+
+.madeorgmain .item .itemimage img {
+    height: 10em;
+    width: auto;
+    box-shadow: rgba(0, 0, 0, 0.609) 0px 5px 15px;
+    border-radius: 50%;
+}
+
+.madeorgmain .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+
+.madeorgouter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.madeorgmain .item .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.madeorgmain .item .options a {
+    background-color: blue;
+    padding: 0.5em;
+    border-radius: 1em;
+    color: white;
+    text-align: center;
+}
+
+.madeorgmain .item .options #del {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: rgb(217, 15, 15);
+}
+
+.madeorgmain .item .itemtext * {
+    padding-bottom: 0.2em;
+    padding-top: 0.5em;
+}

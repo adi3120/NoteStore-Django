@@ -1,0 +1,44 @@
+.createorgouter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50vh;
+}
+
+.createorgmain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1em;
+    width: 30%;
+    border-radius: 1em;
+    margin-top: 3em;
+}
+
+.createorgmain form * {
+    padding: 1em;
+    font-size: larger;
+}
+
+.createorgmain form input {
+    width: 14em;
+    margin-bottom: 1em;
+}
+
+.createorgmain form button {
+    width: 14em;
+    background-color: blue;
+    color: white;
+    padding: 0.5em;
+}
+
+.createorgmain form .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
