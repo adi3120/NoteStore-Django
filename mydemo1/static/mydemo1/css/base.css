@@ -1,11 +1,10 @@
 * {
-    border: 0;
     margin: 0;
     text-decoration: none;
 }
 
 body {
-    background-color: aliceblue;
+    background-color: rgb(230, 230, 230);
 }
 
 .nav {

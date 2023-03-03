@@ -99,6 +99,8 @@ def createorganisation(request):
 		cursor.execute(c)
 		m.commit()
 
+		
+
 
 	return render(request,'mydemo1/createOrganisation.html')
 
@@ -187,7 +189,14 @@ def deleteOr(request,pk):
 	c="delete from organisation where id="+str(pk)
 	cursor.execute(c)
 	m.commit()
-	madeorganisation(request)
+	global admin_id
+	c="select * from organisation where owner_id="+str(admin_id)
+	cursor.execute(c)
+	a=cursor.fetchall()
+	context={
+		'a':a
+	}
+	return render(request,'mydemo1/madeorganisation.html',context=context)
 
 
 def uploadNotesOr(request,pk):
@@ -202,6 +211,8 @@ def uploadNotesOr(request,pk):
 	print(isuploader)
 	if isuploader[0][0]==0:
 		return render(request,'mydemo1/nottheuploader.html')
+
+
 	
 
 	
@@ -226,8 +237,13 @@ def uploadNotesOr(request,pk):
 		cursor.execute("select id from note where title=%s and user_id=%s and org_id=%s",vals)
 		
 		note_id=cursor.fetchall()
-		print(note_id)
 		note_id=note_id[0][0]
+		c="insert into note_uploader values(%s,%s)"
+		x=(note_id,admin_id)
+		cursor.execute(c,x)
+		m.commit()
+
+		print(note_id)
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -246,8 +262,7 @@ def addPhotosNo(request,pk):
 	cursor=m.cursor()
 	file_name=""
 	global admin_id
-	print(admin_id)
-	print(pk)
+
 	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
 	vals=(admin_id,pk)
 	cursor.execute(c,vals)
@@ -261,11 +276,16 @@ def addPhotosNo(request,pk):
 		files=request.FILES
 
 		images=files.getlist('upload')
+		print(images)
 
 		datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
 
 		
 		note_id=pk
+		c="select org_id from note where id="+str(note_id)
+		cursor.execute(c)
+		x=cursor.fetchall()
+		org_id=x[0][0]
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -273,7 +293,7 @@ def addPhotosNo(request,pk):
 
 			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
 			
-			vals=("PIC1.jpeg",datetime_current,pk,admin_id,note_id,image)
+			vals=("PIC1.jpeg",datetime_current,org_id,admin_id,note_id,image)
 
 			cursor.execute(c,vals)
 			m.commit()
@@ -319,3 +339,92 @@ def visitNote(request,pk):
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
+
+def deleteNote(request,pk):
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+	c="select org_id from note where id="+str(pk)
+	cursor.execute(c)
+	org_id=cursor.fetchall()
+	org_id=org_id[0][0]
+	global admin_id
+	c="select count(*) from organisation where id=%s and owner_id=%s"
+	vals=(org_id,admin_id)
+	cursor.execute(c,vals)
+	isuploader=cursor.fetchall()
+	if isuploader[0][0]==0:
+		return render(request,'mydemo1/nottheuploader.html')
+	
+	c="delete from note where id="+str(pk)
+	cursor.execute(c)
+	m.commit()
+	c="select * from note,user where note.user_id=user.id and note.org_id="+str(org_id)
+	cursor.execute(c)
+	final=cursor.fetchall()
+	context={
+		'final':final
+	}
+
+	return render(request,'mydemo1/viewNotesOr.html',context=context)
+
+def renameNo(request,pk):
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+
+	c="select org_id from note where id="+str(pk)
+	cursor.execute(c)
+	org_id=cursor.fetchall()
+	org_id=org_id[0][0]
+
+	global admin_id
+	c="select count(*) from organisation where id=%s and owner_id=%s"
+	vals=(org_id,admin_id)
+	cursor.execute(c,vals)
+	isuploader=cursor.fetchall()
+
+	if isuploader[0][0]==0:
+		return render(request,'mydemo1/nottheuploader.html')
+	
+	if request.method=="POST":
+		d=request.POST
+		for key,value in d.items():
+			if(key=="note_name"):
+				c="update note set title=%s where id=%s"
+				vals=(value,pk)
+				cursor.execute(c,vals)
+				m.commit()
+
+	c="select title from note where id="+str(pk)
+	cursor.execute(c)
+	oldName=cursor.fetchall()
+
+
+	context={
+		"oldName":oldName[0][0]
+	}
+
+	return render(request,'mydemo1/renameNo.html',context=context)
+
+def allUserOr(request,pk):
+	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+
+	c="select id,fname,lname,email from user where id in(select userid from user_org where orgid="+str(pk)+")"
+	print(c)
+	cursor.execute(c)
+	val=cursor.fetchall()
+
+	
+
+	c="select name from organisation where id="+str(pk)
+	cursor.execute(c)
+	org_name=cursor.fetchall()
+	org_name=org_name[0][0]
+
+	context={
+		'users':val,
+		'name':org_name,
+	}
+
+	return render(request,"mydemo1/allUserOr.html",context=context)
+	

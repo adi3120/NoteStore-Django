@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{% static 'mydemo1/css/createorg.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/madeorg.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/viewnotes.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/visitNote.css' %}">
 </head>
 
 <body>
@@ -81,7 +82,12 @@
     <div>
         {% block visitNote %} {%endblock visitNote%}
     </div>
-
+    <div>
+        {% block renameNo %} {%endblock renameNo%}
+    </div>
+    <div>
+        {% block allUserOr %} {%endblock allUserOr%}
+    </div>
 </body>
 
 </html>

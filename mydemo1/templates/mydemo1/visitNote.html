@@ -1,31 +1,41 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Visit Note{% endblock title %} {% block visitNote %}
+<h2>Note : {{images.0.8}} | Organisation : {{images.0.5}}</h2>
+<div class="notePicOuter">
+    <div class="selectedPic" id="selImgConMain">
+        <div class="image">
+            <img src="" alt="">
+        </div>
+        <div class="controls">
+            <div class="contBut" id="rotateAntiClock">
+                <img src="{%static 'mydemo1/images/leftRot.png'%}" alt="">
+            </div>
+            <div class="contBut" id="rotateClock">
+                <img src="{%static 'mydemo1/images/rightRot.png'%}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="notePicMain">
 
-<div>
-    <h1>Notes : {{images.0.8}} </h1>
-    <h2>Organisation : {{images.0.5}}</h2>
-    <center>
-        <table border="1">
-            <tr>
-                <th>Photo</th>
-                <th>Date Time</th>
-                <th>Uploader Email</th>
-            </tr>
-            {%for i in images%}
-            <tr>
-                <td>
-                    <img src='data:image/jpeg;base64,{{i.0}}' alt="" style="width:500px;height:500px;">
-                </td>
-                <td>
+        {%for i in images%}
+        <div class="item" id="{{i.1}}">
+            <div class="pic">
+                <center>
+                    <img src='data:image/jpeg;base64,{{i.0}}' alt="">
+                </center>
+            </div>
+            <div class="text">
+                <div>
                     {{i.3}}
-                </td>
-                <td>
+                </div>
+                <div>
                     {{i.9}}
-                </td>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
 
-            </tr>
-            {%endfor%}
+    </div>
 
-        </table>
-    </center>
 </div>
+<script src="{%static 'mydemo1/js/script.js'%}"></script>
 {%endblock visitNote%}

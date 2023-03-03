@@ -1,0 +1,52 @@
+body {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.notePicOuter {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.notePicOuter .selectedPic {
+    height: 50%;
+    width: 90%;
+}
+
+.notePicOuter .notePicMain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    flex-wrap: nowrap;
+    overflow:scroll;
+}
+
+
+.notePicOuter .notePicMain .item .pic img {
+    height: 7em;
+    width: 7em;
+    object-fit: contain;
+}
+
+.notePicOuter .notePicMain .item:hover {
+    border: 0.7em solid cyan;
+    transition: 250ms;
+}
+
+.notePicOuter .selectedPic .image img {
+    max-width: 100%;
+    height: 20em;
+}
+
+.notePicOuter .selectedPic .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.notePicOuter .notePicMain .item{
+	flex-shrink:0;
+}
