@@ -20,10 +20,19 @@
 
 .loginmain form {
     padding: 1em;
+    width: 20em;
+}
+
+.loginmain form .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .loginmain form * {
     padding-bottom: 1em;
+    width: 100%;
 }
 
 .outerlogin * {
@@ -35,7 +44,6 @@
 }
 
 .outerlogin .loginmain form .container button {
-    width: 100%;
     text-align: center;
     padding: 0.5em;
     background-color: blue;

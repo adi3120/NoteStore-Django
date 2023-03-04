@@ -16,17 +16,19 @@
     <link rel="stylesheet" href="{% static 'mydemo1/css/madeorg.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/viewnotes.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/visitNote.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/addUser.css' %}">
 </head>
 
 <body>
     <div class="nav">
         <div class="left">
-            <h1>NoteStore</h1>
+            <h1><a href="{% url 'index' %}">NoteStore</a></h1>
         </div>
         <div class="right">
-            <b><a href="{% url 'index' %}">Home</a></b>
+            <b><a href="{% url 'index' %}">Home</a></b> {%if logged_in%}
+            <b><a href="{% url 'logout' %}">Logout</a></b> {%else%}
             <b><a href="{% url 'signup' %}">Signup</a></b>
-            <b><a href="{% url 'login' %}">Login</a></b>
+            <b><a href="{% url 'login' %}">Login</a></b> {%endif%}
         </div>
 
     </div>

@@ -1,18 +1,20 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Add User{% endblock title %} {% block addUserOr %}
 
-<div>
+<div class="addUserOuter">
     <h1>Add User</h1>
-    <form action="#" method="post">
-        {% csrf_token %} {% load static %}
-        <center>
-            <div class="container">
+    <div class="addUserMain">
 
-                <label for='user_id'><b>User ID : </b></label>
-                <input type='number' placeholder="Enter user id to add" name='user_id' required><br>
-                <button type="submit"><b>Add</b></button><br>
-            </div>
-        </center>
-    </form>
+        <form action="#" method="post">
+            {% csrf_token %} {% load static %}
+            <center>
+                <div class="container">
+
+                    <input type='number' placeholder="Enter user id to add" name='user_id' required><br>
+                    <button type="submit"><b>Add</b></button><br>
+                </div>
+            </center>
+        </form>
+    </div>
 </div>
 
 {%endblock addUserOr%}

@@ -1,14 +1,14 @@
-.outerregister {
-    width: 100%;
+.addUserOuter {
+    width: 100vw;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
     flex-direction: column;
-    margin-top: 2em;
 }
 
-.registermain {
+.addUserMain {
+    margin: 1em;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -17,26 +17,22 @@
     flex-direction: column;
     width: fit-content;
     padding: 1em;
+    border-radius: 1em;
 }
 
-.registermain form {
-    padding: 1em;
+.addUserMain form {
     width: 20em;
+    padding: 0.5em;
 }
 
-.registermain form * {
-    padding-bottom: 1em;
+.addUserMain form .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.outerregister * {
-    font-size: 1.1em;
-}
-
-.outerregister h1 {
-    font-size: 2.1em;
-}
-
-.outerregister .registermain form .container button {
+.addUserMain form .container button {
     width: 100%;
     text-align: center;
     padding: 0.5em;
@@ -45,14 +41,18 @@
     color: white;
 }
 
-.registermain form .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.addUserMain form * {
+    margin: 0.1em;
+}
+
+.addUserMain form .container * {
     width: 100%;
 }
 
-.registermain form .container * {
-    width: 100%;
+.addUserOuter * {
+    font-size: 1.1em;
+}
+
+.addUserOuter h1 {
+    font-size: 2.1em;
 }

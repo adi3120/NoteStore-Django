@@ -1,12 +1,12 @@
 from django.shortcuts import render
 import mysql.connector as sql
-import mysql.connector
-from mysql.connector import errorcode
-import PIL
 import time
 from base64 import b64encode
+from django.shortcuts import redirect
 # Create your views here.
 
+from django.views.decorators.cache import cache_control
+from django.contrib.auth.decorators import login_required
 
 fn=''
 ln=''
@@ -23,9 +23,13 @@ s=''
 em=''
 pwd=''
 
+logged_in=False
+
 # Create your views here.
+@cache_control(no_cache=True, must_revalidate=True)
 def signup(request):
     global fn,ln,s,em,pwd
+    global logged_in
     if request.method=="POST":
         m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
         cursor=m.cursor()
@@ -43,13 +47,18 @@ def signup(request):
         c="insert into user(fname,lname,email,password) Values('{}','{}','{}','{}')".format(fn,ln,em,pwd)
         cursor.execute(c)
         m.commit()
+	
+    context={
+		'logged_in':logged_in
+	}
 
-    return render(request,'mydemo1/signup.html')
+    return render(request,'mydemo1/signup.html',context=context)
 
 em=''
 pwd=''
 
 # Create your views here.
+@cache_control(no_cache=True, must_revalidate=True)
 def login(request):
     global em,pwd
     if request.method=="POST":
@@ -70,11 +79,19 @@ def login(request):
         else:
             global admin_id
             admin_id=t[0][0]
-            print("admin id="+str(admin_id))
-            return render(request,"mydemo1/welcome.html",context={'fname':t[0][1],'lname':t[0][2]})
-    
+            global logged_in
+            logged_in=True
+
+            return render(request,"mydemo1/welcome.html",context={'fname':t[0][1],'lname':t[0][2],'logged_in':logged_in})
+
     return render(request,'mydemo1/login.html')
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def logout(request):
+	global logged_in
+	logged_in=False
+	return redirect('index')
+    
 def createorganisation(request):
 	if request.method=="POST":
 		m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
@@ -98,11 +115,14 @@ def createorganisation(request):
 		c="insert into user_org(userid,orgid) Values('{}','{}')".format(admin_id,orgid)
 		cursor.execute(c)
 		m.commit()
+	context={
+		'logged_in':logged_in
+	}
 
 		
 
 
-	return render(request,'mydemo1/createOrganisation.html')
+	return render(request,'mydemo1/createOrganisation.html',context=context)
 
 def myorganisation(request):
 	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
@@ -115,7 +135,8 @@ def myorganisation(request):
 	a=cursor.fetchall()
 	print(a)
 	context={
-		'or':a
+		'or':a,
+		'logged_in':logged_in,
 	}
 
 	return render(request,'mydemo1/myorganisation.html',context=context)
@@ -128,11 +149,13 @@ def madeorganisation(request):
 	cursor.execute(c)
 	a=cursor.fetchall()
 	context={
-		'a':a
+		'a':a,
+		'logged_in':logged_in,
+
 	}
 	return render(request,'mydemo1/madeorganisation.html',context=context)
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def addUserOr(request,pk):
 	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -145,7 +168,10 @@ def addUserOr(request,pk):
 				vals=(value,pk)
 				cursor.execute(c,vals)
 				m.commit()
-	return render(request,'mydemo1/addUserOr.html')
+	context={
+		'logged_in':logged_in,
+	}
+	return render(request,'mydemo1/addUserOr.html',context=context)
 
 def addUploaderOr(request,pk):
 	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
@@ -159,7 +185,10 @@ def addUploaderOr(request,pk):
 				vals=(pk,value)
 				cursor.execute(c,vals)
 				m.commit()
-	return render(request,'mydemo1/addUploaderOr.html')
+	context={
+		'logged_in':logged_in,
+	}
+	return render(request,'mydemo1/addUploaderOr.html',context=context)
 def renameOr(request,pk):
 	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -177,7 +206,8 @@ def renameOr(request,pk):
 
 
 	context={
-		"oldName":oldName[0][0]
+		"oldName":oldName[0][0],
+		'logged_in':logged_in,
 	}
 
 	return render(request,'mydemo1/renameOr.html',context=context)
@@ -194,7 +224,9 @@ def deleteOr(request,pk):
 	cursor.execute(c)
 	a=cursor.fetchall()
 	context={
-		'a':a
+		'a':a,
+		'logged_in':logged_in,
+
 	}
 	return render(request,'mydemo1/madeorganisation.html',context=context)
 
@@ -208,14 +240,12 @@ def uploadNotesOr(request,pk):
 	vals=(pk,admin_id)
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
-	print(isuploader)
+	context={
+		'logged_in':logged_in,
+
+	}
 	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html')
-
-
-	
-
-	
+		return render(request,'mydemo1/nottheuploader.html',context=context)
 
 	if request.method=="POST":
 		d=request.POST
@@ -232,7 +262,6 @@ def uploadNotesOr(request,pk):
 		vals=(note_name,datetime_current,admin_id,pk)
 		cursor.execute(c,vals)
 		m.commit()
-		print("OK DONE")
 		vals=(note_name,admin_id,pk)
 		cursor.execute("select id from note where title=%s and user_id=%s and org_id=%s",vals)
 		
@@ -243,7 +272,6 @@ def uploadNotesOr(request,pk):
 		cursor.execute(c,x)
 		m.commit()
 
-		print(note_id)
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -255,7 +283,7 @@ def uploadNotesOr(request,pk):
 
 			cursor.execute(c,vals)
 			m.commit()
-	return render(request,'mydemo1/uploadNotesOr.html')
+	return render(request,'mydemo1/uploadNotesOr.html',context=context)
 
 def addPhotosNo(request,pk):
 	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
@@ -267,9 +295,9 @@ def addPhotosNo(request,pk):
 	vals=(admin_id,pk)
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
-	print(isuploader)
+
 	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html')
+		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 	if request.method=="POST":
 		d=request.POST
 		
@@ -299,6 +327,7 @@ def addPhotosNo(request,pk):
 			m.commit()
 	context={
 		"note":pk,
+		'logged_in':logged_in,
 	}
 	return render(request,'mydemo1/addPhotosNo.html',context=context)
 
@@ -313,7 +342,8 @@ def viewNotesOr(request,pk):
 	cursor.execute(c)
 	final=cursor.fetchall()
 	context={
-		'final':final
+		'final':final,
+		'logged_in':logged_in,
 	}
 
 	return render(request,'mydemo1/viewNotesOr.html',context=context)
@@ -335,7 +365,9 @@ def visitNote(request,pk):
 
 	
 	context={
-		'images':images_data
+		'images':images_data,
+		'logged_in':logged_in,
+
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
@@ -353,7 +385,7 @@ def deleteNote(request,pk):
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
 	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html')
+		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 	
 	c="delete from note where id="+str(pk)
 	cursor.execute(c)
@@ -362,7 +394,8 @@ def deleteNote(request,pk):
 	cursor.execute(c)
 	final=cursor.fetchall()
 	context={
-		'final':final
+		'final':final,
+		'logged_in':logged_in,
 	}
 
 	return render(request,'mydemo1/viewNotesOr.html',context=context)
@@ -383,7 +416,7 @@ def renameNo(request,pk):
 	isuploader=cursor.fetchall()
 
 	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html')
+		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 	
 	if request.method=="POST":
 		d=request.POST
@@ -400,7 +433,9 @@ def renameNo(request,pk):
 
 
 	context={
-		"oldName":oldName[0][0]
+		"oldName":oldName[0][0],
+		'logged_in':logged_in,
+
 	}
 
 	return render(request,'mydemo1/renameNo.html',context=context)
@@ -424,6 +459,8 @@ def allUserOr(request,pk):
 	context={
 		'users':val,
 		'name':org_name,
+		'logged_in':logged_in,
+
 	}
 
 	return render(request,"mydemo1/allUserOr.html",context=context)
