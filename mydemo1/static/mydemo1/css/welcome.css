@@ -36,3 +36,19 @@
     font-size: larger;
     font-weight: 700;
 }
+
+@media (max-width: 40em) {
+    .welcomemain {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .welcomemain a {
+        width: 90%;
+    }
+    .welcomemain .logotext .logoimg img {
+        width: 80%;
+        height: auto;
+    }
+}

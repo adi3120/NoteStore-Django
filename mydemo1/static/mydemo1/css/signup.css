@@ -56,3 +56,13 @@
 .registermain form .container * {
     width: 100%;
 }
+
+@media (max-width: 40em) {
+    .registermain {
+        width: 95%;
+    }
+    .registermain form {
+        width: 100%;
+        padding: 0;
+    }
+}

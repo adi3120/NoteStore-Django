@@ -1,14 +1,15 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Rename Organisation{% endblock title %} {% block renameOr %}
 
-<div>
+<div class="renameOrOuter">
     <h1>Rename Organisation : {{oldName}}</h1>
-    <form action="#" method="post">
-        {% csrf_token %}
-        <div class="container">
-            <label for='org_name'><b>New Title : </b></label>
-            <input type='text' placeholder="Enter Organisation title" name='org_name' required><br><br>
-            <button type="submit"><b>Rename</b></button><br>
-        </div>
-    </form>
+    <div class="renameOrMain">
+        <form action="#" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <input type='text' placeholder="Enter New title" name='org_name' required><br><br>
+                <button type="submit"><b>Rename</b></button><br>
+            </div>
+        </form>
+    </div>
 </div>
 {%endblock renameOr%}

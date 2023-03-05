@@ -42,3 +42,30 @@
     text-align: center;
     padding: 0.5em;
 }
+
+@media (max-width: 40em) {
+    .viewnotesouter {
+        width: 100%;
+        align-self: center;
+        padding: 1em;
+    }
+    .viewnotesmain {
+        grid-template-columns: 1fr;
+    }
+    .viewnotesmain .item {
+        width: auto;
+    }
+    .viewnotesmain .item .itemtext {
+        font-size: small;
+    }
+    .viewnotesmain .item .itemlogo {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .viewnotesmain .item .itemlogo img {
+        width: 60%;
+        height: auto;
+    }
+}

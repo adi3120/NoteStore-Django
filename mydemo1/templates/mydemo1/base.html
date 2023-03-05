@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NoteStore | {%block title%} {% endblock title %}</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="{% static 'mydemo1/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/login.css' %}">
@@ -17,6 +18,8 @@
     <link rel="stylesheet" href="{% static 'mydemo1/css/viewnotes.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/visitNote.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/addUser.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/renameOr.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/createNewNote.css' %}">
 </head>
 
 <body>
@@ -24,11 +27,29 @@
         <div class="left">
             <h1><a href="{% url 'index' %}">NoteStore</a></h1>
         </div>
-        <div class="right">
-            <b><a href="{% url 'index' %}">Home</a></b> {%if logged_in%}
-            <b><a href="{% url 'logout' %}">Logout</a></b> {%else%}
-            <b><a href="{% url 'signup' %}">Signup</a></b>
-            <b><a href="{% url 'login' %}">Login</a></b> {%endif%}
+
+        <div class="rightOuter">
+
+            <div class="right">
+                <b><a href="{% url 'index' %}">Home</a></b> {%if logged_in%}
+
+                <div class="options">
+                    <b>Options</b>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <b><a class="dropdown-item" href="{%url 'createorganisation' %}">Create Organisation</a></b>
+                        <b><a class="dropdown-item" href="{%url 'madeorganisation' %}">Organisations Created By you</a></b>
+                        <b><a class="dropdown-item" href="{%url 'myorganisation' %}">Organisations You're in</a></b>
+                    </div>
+                </div>
+
+                <b><a href="{% url 'logout' %}">Logout</a></b> {%else%}
+                <b><a href="{% url 'signup' %}">Signup</a></b>
+                <b><a href="{% url 'login' %}">Login</a></b> {%endif%}
+
+            </div>
+            <div class="hamburger">
+                <img src="{%static 'mydemo1/images/hamburger.png' %}" alt="">
+            </div>
         </div>
 
     </div>
@@ -90,6 +111,10 @@
     <div>
         {% block allUserOr %} {%endblock allUserOr%}
     </div>
+    <script src="{%static 'mydemo1/js/base.js' %}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

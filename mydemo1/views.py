@@ -31,7 +31,7 @@ def signup(request):
     global fn,ln,s,em,pwd
     global logged_in
     if request.method=="POST":
-        m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+        m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
         cursor=m.cursor()
         d=request.POST
         for key,value in d.items():
@@ -62,7 +62,7 @@ pwd=''
 def login(request):
     global em,pwd
     if request.method=="POST":
-        m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+        m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
         cursor=m.cursor()
         d=request.POST
         for key,value in d.items():
@@ -94,7 +94,7 @@ def logout(request):
     
 def createorganisation(request):
 	if request.method=="POST":
-		m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+		m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 		cursor=m.cursor()
 		global name
 		global admin_id
@@ -125,7 +125,7 @@ def createorganisation(request):
 	return render(request,'mydemo1/createOrganisation.html',context=context)
 
 def myorganisation(request):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	global admin_id
 
@@ -142,7 +142,7 @@ def myorganisation(request):
 	return render(request,'mydemo1/myorganisation.html',context=context)
 
 def madeorganisation(request):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	global admin_id
 	c="select * from organisation where owner_id="+str(admin_id)
@@ -157,7 +157,7 @@ def madeorganisation(request):
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def addUserOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	if request.method=="POST":
 		d=request.POST
@@ -174,7 +174,7 @@ def addUserOr(request,pk):
 	return render(request,'mydemo1/addUserOr.html',context=context)
 
 def addUploaderOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	if request.method=="POST":
 		d=request.POST
@@ -190,7 +190,7 @@ def addUploaderOr(request,pk):
 	}
 	return render(request,'mydemo1/addUploaderOr.html',context=context)
 def renameOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	if request.method=="POST":
 		d=request.POST
@@ -213,7 +213,7 @@ def renameOr(request,pk):
 	return render(request,'mydemo1/renameOr.html',context=context)
 
 def deleteOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 
 	c="delete from organisation where id="+str(pk)
@@ -232,7 +232,7 @@ def deleteOr(request,pk):
 
 
 def uploadNotesOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	file_name=""
 	global admin_id
@@ -286,7 +286,7 @@ def uploadNotesOr(request,pk):
 	return render(request,'mydemo1/uploadNotesOr.html',context=context)
 
 def addPhotosNo(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	file_name=""
 	global admin_id
@@ -335,7 +335,7 @@ def addPhotosNo(request,pk):
 	
 
 def viewNotesOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 
 	c="select * from note,user where note.user_id=user.id and note.org_id="+str(pk)
@@ -350,7 +350,7 @@ def viewNotesOr(request,pk):
 
 
 def visitNote(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 
 	c="select photo.data,photo.id,photo.name,photo.date_time,photo.org_id,organisation.name,photo.user_id,photo.note_id,note.title,user.email from  photo,note,user,organisation where photo.note_id=note.id and photo.user_id=user.id and photo.org_id=organisation.id and note.id="+str(pk)
@@ -373,7 +373,7 @@ def visitNote(request,pk):
 	return render(request,'mydemo1/visitNote.html',context=context)
 
 def deleteNote(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	c="select org_id from note where id="+str(pk)
 	cursor.execute(c)
@@ -401,7 +401,7 @@ def deleteNote(request,pk):
 	return render(request,'mydemo1/viewNotesOr.html',context=context)
 
 def renameNo(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 
 	c="select org_id from note where id="+str(pk)
@@ -441,7 +441,7 @@ def renameNo(request,pk):
 	return render(request,'mydemo1/renameNo.html',context=context)
 
 def allUserOr(request,pk):
-	m=sql.connect(host="localhost",user="root",passwd="MNMisBST@123",database='notestore')
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 
 	c="select id,fname,lname,email from user where id in(select userid from user_org where orgid="+str(pk)+")"

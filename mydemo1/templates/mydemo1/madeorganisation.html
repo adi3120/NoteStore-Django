@@ -1,7 +1,9 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Organisations Created By Me{% endblock title %} {% block madeorganisation %}
 
 <div class="madeorgouter">
-    <h1>Organisations i created</h1>
+    <center>
+        <h1>Organisations i created</h1>
+    </center>
     <div class="madeorgmain">
         {%for i in a%}
         <div id={{i.0}} class="item">

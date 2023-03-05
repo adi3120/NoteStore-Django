@@ -42,3 +42,22 @@
     align-items: center;
     flex-direction: column;
 }
+
+@media (max-width: 40em) {
+    .createorgouter {
+        width: 100%;
+        margin-top: 1em;
+        justify-content: center;
+    }
+    .createorgmain {
+        width: 90%;
+    }
+    .createorgmain form input,
+    .createorgmain form button {
+        width: 100%;
+    }
+    .createorgmain form input {
+        font-size: medium;
+        width: 120%;
+    }
+}

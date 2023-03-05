@@ -1,0 +1,58 @@
+.renameOrOuter {
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.renameOrMain {
+    margin: 1em;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.renameOrMain form {
+    width: 20em;
+    padding: 0.5em;
+}
+
+.renameOrMain form .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.renameOrMain form .container button {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background-color: blue;
+    font-size: medium;
+    color: white;
+}
+
+.renameOrMain form * {
+    margin: 0.1em;
+}
+
+.renameOrMain form .container * {
+    width: 100%;
+}
+
+.renameOrOuter * {
+    font-size: 1.1em;
+}
+
+.renameOrOuter h1 {
+    font-size: 2.1em;
+}

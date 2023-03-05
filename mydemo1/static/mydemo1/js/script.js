@@ -59,5 +59,3 @@ controls.forEach(element => {
             }
         })
 })
-
-input.style.fontSize = "16px";

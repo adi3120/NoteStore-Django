@@ -23,3 +23,25 @@
 .mainLeft * {
     padding-bottom: 0.5em;
 }
+
+@media (max-width: 40em) {
+    .main {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .mainRight {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .mainRight img {
+        width: auto;
+        height: 50vh;
+        padding: 2em;
+    }
+    .mainLeft {
+        font-size: small;
+        padding: 2rem;
+    }
+}

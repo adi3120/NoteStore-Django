@@ -1,6 +1,7 @@
 * {
     margin: 0;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 a {
@@ -42,4 +43,51 @@ body {
 .nav .right a {
     font-weight: 750;
     color: rgb(38, 0, 255);
+}
+
+.nav .right .options {
+    font-weight: 750;
+    color: rgb(38, 0, 255);
+}
+
+.nav .right .options .dropdown-menu {
+    display: none;
+}
+
+.nav .right .options:hover>.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(223, 223, 223);
+}
+
+.nav .right .options .dropdown-menu .dropdown-item {
+    font-size: medium;
+    z-index: 1000;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+}
+
+.nav .hamburger {
+    display: none;
+}
+
+@media (max-width: 40em) {
+    .nav .hamburger {
+        display: block;
+    }
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        /* outline: 2px solid red; */
+    }
+    .nav .rightOuter .right {
+        display: none;
+        position: absolute;
+    }
+    .nav .rightOuter {
+        /* outline: 2px solid red; */
+    }
 }

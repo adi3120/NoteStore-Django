@@ -1,7 +1,6 @@
 body {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
 }
 
 .notePicOuter {
@@ -36,7 +35,7 @@ body {
 .notePicOuter .notePicMain .item .pic img {
     height: 7em;
     width: 7em;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .notePicOuter .notePicMain .item:hover {
@@ -46,9 +45,9 @@ body {
 
 .notePicOuter .selectedPic .image img {
     max-width: 100%;
-    height: 20em;
     transition: 250ms;
     padding: 1em;
+    object-fit: cover;
 }
 
 .notePicOuter .selectedPic .image {

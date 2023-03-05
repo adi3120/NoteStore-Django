@@ -50,3 +50,12 @@
     font-size: medium;
     color: white;
 }
+
+@media (max-width: 40em) {
+    .outerlogin .loginmain {
+        width: 90%;
+    }
+    .loginmain form {
+        width: 100%;
+    }
+}
