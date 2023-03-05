@@ -23,6 +23,12 @@
 </head>
 
 <body>
+    <script>
+        let closeurl = "{% static 'mydemo1/images/close_hamburger.png' %}";
+        let openurl = "{% static 'mydemo1/images/hamburger.png' %}";
+        let dropdownurl = "{% static 'mydemo1/images/dropdown.png' %}";
+        let dropupurl = "{% static 'mydemo1/images/dropup.png' %}";
+    </script>
     <div class="nav">
         <div class="left">
             <h1><a href="{% url 'index' %}">NoteStore</a></h1>
@@ -34,7 +40,11 @@
                 <b><a href="{% url 'index' %}">Home</a></b> {%if logged_in%}
 
                 <div class="options">
-                    <b>Options</b>
+                    <div class="opticontext">
+
+                        <b>Options</b>
+                        <img src="{%static 'mydemo1/images/dropdown.png'%}" alt="">
+                    </div>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <b><a class="dropdown-item" href="{%url 'createorganisation' %}">Create Organisation</a></b>
                         <b><a class="dropdown-item" href="{%url 'madeorganisation' %}">Organisations Created By you</a></b>
