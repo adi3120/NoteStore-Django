@@ -48,11 +48,11 @@ def signup(request):
         cursor.execute(c)
         m.commit()
 	
-    context={
-		'logged_in':logged_in
-	}
+    # context={
+	# 	'logged_in':logged_in
+	# }
 
-    return render(request,'mydemo1/signup.html',context=context)
+    return render(request,'mydemo1/signup.html')
 
 em=''
 pwd=''

@@ -1,5 +1,5 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Visit Note{% endblock title %} {% block visitNote %}
-<h2>Note : {{images.0.8}} | Organisation : {{images.0.5}}</h2>
+<h5>Note : {{images.0.8}} | Organisation : {{images.0.5}}</h5>
 <div class="notePicOuter">
     <div class="selectedPic" id="selImgConMain">
         <div class="image">
@@ -14,8 +14,11 @@
             </div>
         </div>
     </div>
+    <div class="helps">
+        <h4>⇽ Scroll</h4>
+        <h4>Scroll ⇾</h4>
+    </div>
     <div class="notePicMain">
-
         {%for i in images%}
         <div class="item" id="{{i.1}}">
             <div class="pic">
@@ -25,10 +28,10 @@
             </div>
             <div class="text">
                 <div>
-                    {{i.3}}
+                    <h6>{{i.3}}</h6>
                 </div>
                 <div>
-                    {{i.9}}
+                    <h6>{{i.9}}</h6>
                 </div>
             </div>
         </div>

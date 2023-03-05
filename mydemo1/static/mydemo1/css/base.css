@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5em;
+    padding: 1em;
     padding-left: 3em;
     border-bottom: 2px solid rgb(131, 131, 131);
 }
@@ -99,6 +99,9 @@ body {
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
+        padding: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
         /* outline: 2px solid red; */
     }
     .nav .rightOuter .right {

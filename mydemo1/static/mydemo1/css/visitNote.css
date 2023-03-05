@@ -32,6 +32,18 @@ body {
     margin-left: auto;
 }
 
+.notePicOuter .helps {
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notePicOuter .helps * {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
 .notePicOuter .notePicMain .item .pic img {
     height: 7em;
     width: 7em;
@@ -47,7 +59,8 @@ body {
     max-width: 100%;
     transition: 250ms;
     padding: 1em;
-    object-fit: cover;
+    object-fit: fill;
+    height: 22em;
 }
 
 .notePicOuter .selectedPic .image {
@@ -81,4 +94,40 @@ body {
 
 .notePicOuter .selectedPic .controls .contBut {
     transition: 250ms;
+}
+
+.notePicMain {
+    align-self: flex-start;
+    border: 0;
+    margin: 0;
+}
+
+@media (max-width: 40em) {
+    .notePicOuter {
+        /* justify-content: space-evenly; */
+    }
+    .notePicOuter .selectedPic .image img {
+        max-width: 100%;
+        transition: 250ms;
+        padding: 0;
+        height: fit-content;
+        object-fit: cover;
+    }
+    .notePicOuter .selectedPic .image img {
+        max-width: 100%;
+        transition: 250ms;
+        padding: 0;
+        object-fit: contain;
+    }
+    .notePicOuter .notePicMain .item .pic img {
+        height: 3em;
+        width: 3em;
+        object-fit: cover;
+    }
+    /* .notePicOuter .selectedPic {
+        margin-bottom: auto;
+    } */
+    /* .notePicOuter .notePicMain {
+        height: 100%;
+    } */
 }
