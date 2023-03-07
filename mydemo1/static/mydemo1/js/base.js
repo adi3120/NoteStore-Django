@@ -5,7 +5,6 @@ rightOuter.addEventListener(
     "click",
     function() {
         menu = document.querySelector(".nav .rightOuter .right");
-        console.log(menu.style.display)
         if (menu.style.display != "flex") {
 
             menu.style.cssText = `

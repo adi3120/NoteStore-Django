@@ -4,8 +4,6 @@ selectedCont = document.querySelector(".image")
 selectdImg = selectedCont.getElementsByTagName("img")
 let angle = 0
 
-console.log(selectdImg)
-    // console.log(selectdImg[0].currentSrc)
 
 images = imageCont.querySelectorAll(".item")
 

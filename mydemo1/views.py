@@ -159,10 +159,8 @@ def myorganisation(request):
 	global admin_id
 
 	c="select * from organisation where id in(select orgid from user_org where userid="+str(admin_id)+")"
-	print(c)
 	cursor.execute(c)
 	a=cursor.fetchall()
-	print(a)
 	context={
 		'or':a,
 		'logged_in':logged_in,
@@ -194,7 +192,6 @@ def addUserOr(request,pk):
 		for key,value in d.items():
 			if(key=="user_id"):
 				c="insert into user_org values(%s,%s)"
-				print(c)
 				vals=(value,pk)
 				cursor.execute(c,vals)
 				m.commit()
@@ -223,7 +220,6 @@ def addUploaderOr(request,pk):
 		for key,value in d.items():
 			if(key=="user_id"):
 				c="insert into note_uploader(note_id,uploader_id) values(%s,%s)"
-				print(c)
 				vals=(pk,value)
 				cursor.execute(c,vals)
 				m.commit()
@@ -379,7 +375,6 @@ def addPhotosNo(request,pk):
 	cursor.execute(c)
 	x=cursor.fetchall()
 	owner_id=x[0][0]
-	print(owner_id)
 	if isuploader[0][0]==0 and owner_id!=admin_id:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 
@@ -389,7 +384,6 @@ def addPhotosNo(request,pk):
 		files=request.FILES
 
 		images=files.getlist('upload')
-		print(images)
 
 		datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
 
@@ -421,7 +415,6 @@ def addPhotosNo(request,pk):
 			'lname':ln,
 			'logged_in':logged_in,
 		}
-		print(request.META.get('HTTP_REFERER'))
 		return render(request,"mydemo1/welcome.html",context=context)
 	context={
 		"note":pk,
@@ -546,7 +539,6 @@ def allUserOr(request,pk):
 	cursor=m.cursor()
 
 	c="select id,fname,lname,email from user where id in(select userid from user_org where orgid="+str(pk)+")"
-	print(c)
 	cursor.execute(c)
 	val=cursor.fetchall()
 

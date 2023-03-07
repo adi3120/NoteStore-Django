@@ -3,7 +3,7 @@
     height: 80%;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
+    width: 100vw;
 }
 
 .mainRight {
@@ -32,18 +32,18 @@
         width: 100vw;
     }
     .mainRight {
-        width: 100vw;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
     .mainRight .right {
-        width: 100vw;
+        width: 100%;
         align-self: center;
     }
     .mainRight img {
-        width: auto;
-        height: 50vh;
+        width: 100%;
+        max-height: 50vh;
         padding: 2em;
     }
     .mainLeft {
