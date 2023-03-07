@@ -4,8 +4,8 @@ import time
 from base64 import b64encode
 from django.shortcuts import redirect
 from django.contrib import messages
-from PIL import Image
-from io import BytesIO
+# from PIL import Image
+# from io import BytesIO
 # Create your views here.
 
 from django.views.decorators.cache import cache_control
@@ -17,12 +17,12 @@ fn=''
 ln=''
 prev_url=''
 
-def compress(image_file):
+# def compress(image_file):
     
-    image = image_file
-    out = BytesIO()
-    image.save(out, format=format,quality=10)
-    print(out)
+#     image = image_file
+#     out = BytesIO()
+#     image.save(out, format=format,quality=10)
+#     print(out)
 
     # return out
 
