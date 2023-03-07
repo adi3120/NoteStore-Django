@@ -1,5 +1,11 @@
- {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Home{% endblock title %} {% block home %}
-
+ {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Home{% endblock title %} {% block home %} {% if messages %}
+<script>
+    alert(`{% for message in messages %}
+    {{ message }}
+        {% endfor %}
+		`)
+</script>
+{% endif %}
 <div class="main">
 
     <div class="mainLeft">

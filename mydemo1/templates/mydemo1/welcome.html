@@ -1,9 +1,17 @@
-{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Profile{% endblock title %} {% block profile_welcome %}
-
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Profile{% endblock title %} {% block profile_welcome %} {% if messages %}
+<script>
+    alert(`{% for message in messages %}
+    {{ message }}
+        {% endfor %}
+		`)
+</script>
+{% endif %}
 <div class="outerwelcome">
     <center>
-        <h1>Welcome {{fname}} {{lname}}</center>
-    </h1>
+        <h1 class="nicetext">
+            <span style="color: black;"> Welcome: </span>{{fname}} {{lname}}
+        </h1>
+    </center>
     <div class="welcomemain">
 
         <a href="{%url 'createorganisation' %}">

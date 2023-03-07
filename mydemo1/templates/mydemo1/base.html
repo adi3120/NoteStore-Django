@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{% static 'mydemo1/css/addUser.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/renameOr.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/createNewNote.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/howtouse.css' %}">
 </head>
 
 <body>
@@ -30,18 +31,25 @@
         let dropupurl = "{% static 'mydemo1/images/dropup.png' %}";
     </script>
     <div class="nav">
+        {%if logged_in%}
+        <div class="left">
+            <h1><a href="{% url 'welcome' %}">NoteStore</a></h1>
+        </div>
+        {%else%}
         <div class="left">
             <h1><a href="{% url 'index' %}">NoteStore</a></h1>
         </div>
-
+        {%endif%}
         <div class="rightOuter">
 
             <div class="right">
-                <b><a href="{% url 'index' %}">Home</a></b> {%if logged_in%}
+                {%if logged_in%}
+                <b><a class="buttonCool" href="{% url 'welcome' %}">Home</a></b> {%else%}
+                <b><a class="buttonCool" href="{% url 'index' %}">Home</a></b> {%endif%}
+                <b><a class="buttonCool" href="{% url 'howtouse' %}">How to use</a></b> {%if logged_in%}
 
                 <div class="options">
-                    <div class="opticontext">
-
+                    <div class="opticontext buttonCool">
                         <b>Options</b>
                         <img src="{%static 'mydemo1/images/dropdown.png'%}" alt="">
                     </div>
@@ -52,9 +60,9 @@
                     </div>
                 </div>
 
-                <b><a href="{% url 'logout' %}">Logout</a></b> {%else%}
-                <b><a href="{% url 'signup' %}">Signup</a></b>
-                <b><a href="{% url 'login' %}">Login</a></b> {%endif%}
+                <b><a class="buttonCool" href="{% url 'logout' %}">Logout</a></b> {%else%}
+                <b><a class="buttonCool" href="{% url 'signup' %}">Signup</a></b>
+                <b><a class="buttonCool" href="{% url 'login' %}">Login</a></b> {%endif%}
 
             </div>
             <div class="hamburger">
@@ -120,6 +128,9 @@
     </div>
     <div>
         {% block allUserOr %} {%endblock allUserOr%}
+    </div>
+    <div>
+        {% block howtouse %} {%endblock howtouse%}
     </div>
     <script src="{%static 'mydemo1/js/base.js' %}"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

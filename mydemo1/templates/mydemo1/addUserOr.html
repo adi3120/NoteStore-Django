@@ -1,6 +1,7 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Add User{% endblock title %} {% block addUserOr %}
 
 <div class="addUserOuter">
+
     <h1>Add User</h1>
     <div class="addUserMain">
 
@@ -15,6 +16,11 @@
             </center>
         </form>
     </div>
+    <center>
+        <a href="{%url 'madeorganisation' %}">
+			Go back
+		</a>
+    </center>
 </div>
 
 {%endblock addUserOr%}

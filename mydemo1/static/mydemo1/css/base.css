@@ -68,6 +68,7 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 3em;
+    width: max-content;
 }
 
 .nav .right .options .dropdown-menu .dropdown-item {
@@ -88,6 +89,19 @@ body {
 .rightOuter .right .options .opticontext {
     display: flex;
     margin-right: -1em;
+}
+
+.buttonCool {
+    background-color: gold;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    width: max-content;
+}
+
+.buttonDrip {
+    background-color: crimson;
+    padding: 0.2em;
+    border-radius: 0.5em;
 }
 
 @media (max-width: 40em) {

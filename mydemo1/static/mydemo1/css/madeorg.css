@@ -10,6 +10,10 @@
     border-radius: 1em;
 }
 
+.madeorgmain .item:hover {
+    box-shadow: rgba(55, 73, 159, 6) 0px 5px 15px;
+}
+
 .madeorgmain .item .itemimage img {
     height: 10em;
     width: auto;

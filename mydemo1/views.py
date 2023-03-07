@@ -3,27 +3,33 @@ import mysql.connector as sql
 import time
 from base64 import b64encode
 from django.shortcuts import redirect
+from django.contrib import messages
+from PIL import Image
+from io import BytesIO
 # Create your views here.
 
 from django.views.decorators.cache import cache_control
 from django.contrib.auth.decorators import login_required
 
+admin_id=0
+logged_in=False
 fn=''
 ln=''
-phn=''
-email=''
-admin_id=0
+prev_url=''
+
+def compress(image_file):
+    
+    image = image_file
+    out = BytesIO()
+    image.save(out, format=format,quality=10)
+    print(out)
+
+    # return out
+
 
 def index(request):
 	return render(request,'mydemo1/home.html')
 
-fn=''
-ln=''
-s=''
-em=''
-pwd=''
-
-logged_in=False
 
 # Create your views here.
 @cache_control(no_cache=True, must_revalidate=True)
@@ -47,6 +53,8 @@ def signup(request):
         c="insert into user(fname,lname,email,password) Values('{}','{}','{}','{}')".format(fn,ln,em,pwd)
         cursor.execute(c)
         m.commit()
+        messages.success(request, 'Profile Created')
+        return render(request,'mydemo1/home.html')
 	
     # context={
 	# 	'logged_in':logged_in
@@ -77,8 +85,11 @@ def login(request):
         if t==():
             return render(request,'mydemo1/error.html')
         else:
+            global fn,ln
             global admin_id
             admin_id=t[0][0]
+            fn=t[0][1]
+            ln=t[0][2]
             global logged_in
             logged_in=True
 
@@ -91,6 +102,17 @@ def logout(request):
 	global logged_in
 	logged_in=False
 	return redirect('index')
+
+def welcome(request):
+	global fn,ln,logged_in
+	global admin_id
+	context={
+		'fname':fn,
+		'lname':ln,
+		'logged_in':logged_in,
+	}
+	return render(request,"mydemo1/welcome.html",context=context)
+
     
 def createorganisation(request):
 	if request.method=="POST":
@@ -102,8 +124,6 @@ def createorganisation(request):
 		for key,value in d.items():
 			if key=="org_name":
 				name=value
-
-
 		c="insert into organisation(name,owner_id) Values('{}','{}')".format(name,admin_id)
 		cursor.execute(c)
 		m.commit()
@@ -115,13 +135,18 @@ def createorganisation(request):
 		c="insert into user_org(userid,orgid) Values('{}','{}')".format(admin_id,orgid)
 		cursor.execute(c)
 		m.commit()
+		global fn,ln,logged_in
+		context={
+			'fname':fn,
+			'lname':ln,
+			'logged_in':logged_in,
+		}
+		messages.success(request, 'Organisation Created Successfully')
+		return render(request,"mydemo1/welcome.html",context=context)
+
 	context={
 		'logged_in':logged_in
 	}
-
-		
-
-
 	return render(request,'mydemo1/createOrganisation.html',context=context)
 
 def myorganisation(request):
@@ -200,6 +225,20 @@ def renameOr(request,pk):
 				vals=(value,pk)
 				cursor.execute(c,vals)
 				m.commit()
+				messages.success(request, 'Organisation Renamed Successfully')
+				global admin_id
+				global logged_in
+				c="select * from organisation where owner_id="+str(admin_id)
+				cursor.execute(c)
+				a=cursor.fetchall()
+				context={
+					'a':a,
+					'logged_in':logged_in,
+
+				}
+				return render(request,'mydemo1/madeorganisation.html',context=context)
+
+
 	c="select name from organisation where id="+str(pk)
 	cursor.execute(c)
 	oldName=cursor.fetchall()
@@ -236,6 +275,7 @@ def uploadNotesOr(request,pk):
 	cursor=m.cursor()
 	file_name=""
 	global admin_id
+	global logged_in
 	c="select count(*) from organisation where id=%s and owner_id=%s"
 	vals=(pk,admin_id)
 	cursor.execute(c,vals)
@@ -274,8 +314,9 @@ def uploadNotesOr(request,pk):
 
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
-
+	
 			image=img.read()
+
 
 			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
 			
@@ -283,6 +324,16 @@ def uploadNotesOr(request,pk):
 
 			cursor.execute(c,vals)
 			m.commit()
+
+		messages.success(request,"Note Created Successfully")
+		global fn,ln
+
+		context={
+			'fname':fn,
+			'lname':ln,
+			'logged_in':logged_in,
+		}
+		return render(request,"mydemo1/welcome.html",context=context)
 	return render(request,'mydemo1/uploadNotesOr.html',context=context)
 
 def addPhotosNo(request,pk):
@@ -465,3 +516,10 @@ def allUserOr(request,pk):
 
 	return render(request,"mydemo1/allUserOr.html",context=context)
 	
+
+def howtouse(request):
+	global logged_in
+	context={
+		'logged_in':logged_in,
+	}
+	return render(request,"mydemo1/howtouse.html",context=context)

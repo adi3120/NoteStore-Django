@@ -1,0 +1,59 @@
+body {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.howtouseouter {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.howtouseouter .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* outline: 0.2em solid rebeccapurple; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.howtouseouter .item .image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3em;
+}
+
+.howtouseouter .item .text {
+    /* outline: 0.2em solid rebeccapurple; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1em;
+    border-radius: 0.3em;
+    background-color: rgb(217, 217, 217);
+    margin: 1em;
+}
+
+.howtouseouter .item .image img {
+    /* outline: 0.2em solid rebeccapurple; */
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1em;
+    border-radius: 1em;
+    max-width: 100vw;
+    height: auto;
+}
+
+@media (max-width: 40em) {
+    .howtouseouter h1 {
+        font-size: large;
+    }
+    .howtouseouter h2 {
+        font-size: medium;
+    }
+}

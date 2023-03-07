@@ -1,0 +1,32 @@
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}How to Use{% endblock title %} {% block howtouse %}
+
+
+<div class="howtouseouter">
+    <div>
+        <div class="text">
+            <h1>How to use NoteStore</h1>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="text">
+            <h2>As an admin</h2>
+        </div>
+        <div class="image">
+            <img src="{%static 'mydemo1/images/Admin.png' %}" alt="">
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="text">
+            <h2>As a non-admin user</h2>
+        </div>
+        <div class="image">
+            <img src="{%static 'mydemo1/images/Viewer1.png' %}" alt="">
+            <img src="{%static 'mydemo1/images/Viewer2.png' %}" alt="">
+        </div>
+    </div>
+</div>
+
+
+{%endblock howtouse%}

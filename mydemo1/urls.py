@@ -6,9 +6,11 @@ urlpatterns = [
     path('signup', views.signup, name='signup'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('user/welcome', views.welcome, name='welcome'),
     path('user/createorganisation', views.createorganisation, name='createorganisation'),
     path('user/madeorganisation', views.madeorganisation, name='madeorganisation'),
     path('user/myorganisation', views.myorganisation, name='myorganisation'),
+    path('howtouse', views.howtouse, name='howtouse'),
 
     path('user/organisation/addUserOr/<int:pk>', views.addUserOr, name='addUserOr'),
     path('user/organisation/allUserOr/<int:pk>', views.allUserOr, name='allUserOr'),

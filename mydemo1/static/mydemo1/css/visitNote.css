@@ -19,6 +19,7 @@ body {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    margin-top: 3em;
 }
 
 .notePicOuter .notePicMain {
@@ -47,20 +48,26 @@ body {
 .notePicOuter .notePicMain .item .pic img {
     height: 7em;
     width: 7em;
-    object-fit: cover;
+    object-fit: contain;
+}
+
+.notePicOuter .notePicMain {
+    padding: 1em;
+    object-fit: contain;
 }
 
 .notePicOuter .notePicMain .item:hover {
-    border: 0.7em solid cyan;
+    outline: 0.7em solid cyan;
     transition: 250ms;
+    border-radius: 1em;
 }
 
 .notePicOuter .selectedPic .image img {
     max-width: 100%;
     transition: 250ms;
-    padding: 1em;
-    object-fit: fill;
-    height: 22em;
+    padding: 0em;
+    object-fit: contain;
+    height: 20em;
 }
 
 .notePicOuter .selectedPic .image {
@@ -110,13 +117,7 @@ body {
         max-width: 100%;
         transition: 250ms;
         padding: 0;
-        height: fit-content;
-        object-fit: cover;
-    }
-    .notePicOuter .selectedPic .image img {
-        max-width: 100%;
-        transition: 250ms;
-        padding: 0;
+        height: 14em;
         object-fit: contain;
     }
     .notePicOuter .notePicMain .item .pic img {

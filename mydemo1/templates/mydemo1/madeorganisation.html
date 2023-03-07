@@ -1,9 +1,16 @@
-{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Organisations Created By Me{% endblock title %} {% block madeorganisation %}
-
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Organisations Created By Me{% endblock title %} {% block madeorganisation %} {% if messages %}
+<script>
+    alert(`{% for message in messages %}
+    {{ message }}
+        {% endfor %}
+		`)
+</script>
+{% endif %}
 <div class="madeorgouter">
     <center>
         <h1>Organisations i created</h1>
     </center>
+
     <div class="madeorgmain">
         {%for i in a%}
         <div id={{i.0}} class="item">
