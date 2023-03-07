@@ -576,7 +576,7 @@ def deletePhoto(request,pk):
 	x=cursor.fetchall()
 	note_id=x[0][0]
 
-	print("Note ID: ",note_id)
+	#print("Note ID: ",note_id)
 
 	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
 	vals=(admin_id,note_id)
@@ -589,7 +589,7 @@ def deletePhoto(request,pk):
 	cursor.execute(c)
 	x=cursor.fetchall()
 	org_id=x[0][0]
-	print("Org ID: ",org_id)
+	#print("Org ID: ",org_id)
 
 
 	c="select owner_id from organisation where id="+str(org_id)
@@ -597,7 +597,7 @@ def deletePhoto(request,pk):
 	x=cursor.fetchall()
 	owner_id=x[0][0]
 
-	print("Owner ID: ",owner_id)
+	#print("Owner ID: ",owner_id)
 	if isuploader[0][0]==0 and owner_id!=admin_id:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 
