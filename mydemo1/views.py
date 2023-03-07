@@ -4,11 +4,11 @@ import time
 from base64 import b64encode
 from django.shortcuts import redirect
 from django.contrib import messages
-# from PIL import Image
-# from io import BytesIO
-# Create your views here.
 
-from django.views.decorators.cache import cache_control
+from io import BytesIO
+from PIL import Image
+
+from django.views.decorators.cache import cache_control,never_cache
 from django.contrib.auth.decorators import login_required
 
 admin_id=0
@@ -17,14 +17,16 @@ fn=''
 ln=''
 prev_url=''
 
-# def compress(image_file):
-    
-#     image = image_file
-#     out = BytesIO()
-#     image.save(out, format=format,quality=10)
-#     print(out)
 
-    # return out
+def compress_image(image):
+
+    with BytesIO() as output:
+    
+        image.save(output, format='JPEG', quality=20)
+    
+        return output.getvalue()
+
+
 
 
 def index(request):
@@ -103,6 +105,7 @@ def logout(request):
 	logged_in=False
 	return redirect('index')
 
+@never_cache
 def welcome(request):
 	global fn,ln,logged_in
 	global admin_id
@@ -113,7 +116,7 @@ def welcome(request):
 	}
 	return render(request,"mydemo1/welcome.html",context=context)
 
-    
+@never_cache
 def createorganisation(request):
 	if request.method=="POST":
 		m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
@@ -148,7 +151,7 @@ def createorganisation(request):
 		'logged_in':logged_in
 	}
 	return render(request,'mydemo1/createOrganisation.html',context=context)
-
+@never_cache
 def myorganisation(request):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -166,6 +169,7 @@ def myorganisation(request):
 
 	return render(request,'mydemo1/myorganisation.html',context=context)
 
+@never_cache
 def madeorganisation(request):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -214,6 +218,8 @@ def addUploaderOr(request,pk):
 		'logged_in':logged_in,
 	}
 	return render(request,'mydemo1/addUploaderOr.html',context=context)
+
+@never_cache
 def renameOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -307,16 +313,17 @@ def uploadNotesOr(request,pk):
 		
 		note_id=cursor.fetchall()
 		note_id=note_id[0][0]
-		c="insert into note_uploader values(%s,%s)"
+		c="insert into note_uploader(note_id,uploader_id) values(%s,%s)"
 		x=(note_id,admin_id)
 		cursor.execute(c,x)
 		m.commit()
-
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
-	
-			image=img.read()
-
+			
+			img.seek(0)
+			image = Image.open(BytesIO(img.read()))
+			image = image.convert('RGB')
+			image=compress_image(image)
 
 			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
 			
@@ -347,8 +354,21 @@ def addPhotosNo(request,pk):
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
 
-	if isuploader[0][0]==0:
+
+	note_id=pk
+	c="select org_id from note where id="+str(note_id)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	org_id=x[0][0]
+
+	c="select owner_id from organisation where id="+str(org_id)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	owner_id=x[0][0]
+	print(owner_id)
+	if isuploader[0][0]==0 and owner_id!=admin_id:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
+
 	if request.method=="POST":
 		d=request.POST
 		
@@ -367,8 +387,11 @@ def addPhotosNo(request,pk):
 		org_id=x[0][0]
 		for img in images:
 			datetime_current=time.strftime('%Y-%m-%d %H:%M:%S')
+			img.seek(0)
+			image = Image.open(BytesIO(img.read()))
+			image = image.convert('RGB')
+			image=compress_image(image)
 
-			image=img.read()
 
 			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
 			
@@ -435,6 +458,8 @@ def deleteNote(request,pk):
 	vals=(org_id,admin_id)
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
+
+
 	if isuploader[0][0]==0:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 	

@@ -59,3 +59,13 @@ controls.forEach(element => {
             }
         })
 })
+
+function scrollleft() {
+    let myDiv = document.querySelector(".notePicOuter .helps .leftscroll");
+    myDiv.scrollTop -= 100; // change this value to adjust scroll amount
+}
+
+function scrollright() {
+    let myDiv = document.querySelector(".notePicOuter .helps .leftscroll");
+    myDiv.scrollTop += 100; // change this value to adjust scroll amount
+}

@@ -11,7 +11,7 @@ rightOuter.addEventListener(
             menu.style.cssText = `
 				display:flex;
 				flex-direction:column;
-				width:100vw;
+				width:100%;
 
 				left:0;
 				align-items:center;
@@ -51,7 +51,7 @@ options.addEventListener(
 			flex-direction: column;
 			position: absolute;
 			// background-color: rgb(223, 223, 223);
-			width:100vw;
+			width:100%;
 			left:0;
 			align-items:center;
 			z-index: 1000;
