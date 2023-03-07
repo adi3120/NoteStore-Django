@@ -565,3 +565,61 @@ def howtouse(request):
 		'logged_in':logged_in,
 	}
 	return render(request,"mydemo1/howtouse.html",context=context)
+
+def deletePhoto(request,pk):
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+	global admin_id,logged_in
+
+	c="select note_id from photo where id="+str(pk)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	note_id=x[0][0]
+
+	print("Note ID: ",note_id)
+
+	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
+	vals=(admin_id,note_id)
+	cursor.execute(c,vals)
+	isuploader=cursor.fetchall()
+
+
+	photoid=pk
+	c="select org_id from photo where id="+str(photoid)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	org_id=x[0][0]
+	print("Org ID: ",org_id)
+
+
+	c="select owner_id from organisation where id="+str(org_id)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	owner_id=x[0][0]
+
+	print("Owner ID: ",owner_id)
+	if isuploader[0][0]==0 and owner_id!=admin_id:
+		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
+
+	
+	c="delete from photo where id="+str(pk)
+	cursor.execute(c)
+	m.commit()
+	c="select photo.data,photo.id,photo.name,photo.date_time,photo.org_id,organisation.name,photo.user_id,photo.note_id,note.title,user.email from  photo,note,user,organisation where photo.note_id=note.id and photo.user_id=user.id and photo.org_id=organisation.id and note.id="+str(note_id)
+	cursor.execute(c)
+
+	images_data=cursor.fetchall()
+
+
+	for i in range(0,len(images_data)):
+		images_data[i]=list(images_data[i])
+		images_data[i][0]=b64encode(images_data[i][0]).decode("utf-8")
+
+	
+	context={
+		'images':images_data,
+		'logged_in':logged_in,
+
+	}
+		
+	return render(request,'mydemo1/visitNote.html',context=context)

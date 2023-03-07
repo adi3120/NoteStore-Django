@@ -110,6 +110,18 @@ body {
     transition: 250ms;
 }
 
+.notePicMain .item .text .options {
+    background-color: rgb(217, 15, 15);
+    padding: 0.4em;
+    width: max-content;
+    color: white;
+    align-self: center;
+}
+
+.notePicMain .item .text .options * {
+    color: white;
+}
+
 @media (max-width: 40em) {
     .notePicOuter {
         /* justify-content: space-evenly; */

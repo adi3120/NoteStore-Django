@@ -36,9 +36,12 @@ controls.forEach(element => {
                 reqHeight = document.querySelector("#selImgConMain").offsetHeight
 
                 ratio = selectdImg[0].offsetWidth / selectdImg[0].offsetHeight
-                if (angle % 180 == 0)
+                if (angle % 180 == 0) {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + 'scale(1)'
-                else {
+                    selectdImg[0].style.zIndex = -100;
+
+                } else {
+                    selectdImg[0].style.zIndex = -100;
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + `scale(${1/ratio})`
 
                 }
@@ -48,10 +51,14 @@ controls.forEach(element => {
                 reqHeight = document.querySelector("#selImgConMain").offsetHeight
 
                 ratio = selectdImg[0].offsetWidth / selectdImg[0].offsetHeight
-                if (angle % 180 == 0)
+                if (angle % 180 == 0) {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + 'scale(1)'
-                else {
+                    selectdImg[0].style.zIndex = -100;
+
+                } else {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + `scale(${1/ratio})`
+                    selectdImg[0].style.zIndex = -100;
+
 
                 }
             }

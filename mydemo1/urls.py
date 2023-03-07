@@ -23,5 +23,6 @@ urlpatterns = [
     path('user/organisation/viewNotesOr/<int:pk>', views.viewNotesOr, name='viewNotesOr'), 
     path('user/organisation/note/uploadNotesOr/<int:pk>', views.uploadNotesOr, name='uploadNotesOr'), 
     path('user/organisation/note/visitNote/<int:pk>', views.visitNote, name='visitNote'), 
+    path('user/organisation/note/visitNote/deletePhoto/<int:pk>', views.deletePhoto, name='deletePhoto'), 
     path('', views.index, name='index'),
 ]
