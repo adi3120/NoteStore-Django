@@ -127,3 +127,8 @@ import os
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# SESSION_COOKIE_AGE = 3600  # 1 hour
+# SESSION_COOKIE_NAME = 'mysite_session'

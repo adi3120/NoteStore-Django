@@ -1,14 +1,14 @@
-.addUserOuter {
-    width: 100vw;
-    height: 70vh;
+.addUploaderOuter {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 70vh;
     flex-direction: column;
+    margin-top: 2em;
 }
 
-.addUserMain {
-    margin: 1em;
+.addUploaderMain {
     background-color: white;
     display: flex;
     justify-content: center;
@@ -17,22 +17,26 @@
     flex-direction: column;
     width: fit-content;
     padding: 1em;
-    border-radius: 1em;
 }
 
-.addUserMain form {
+.addUploaderMain form {
+    padding: 1em;
     width: 20em;
-    padding: 0.5em;
 }
 
-.addUserMain form .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.addUploaderMain form * {
+    padding-bottom: 1em;
 }
 
-.addUserMain form .container button {
+.addUploaderOuter * {
+    font-size: 1.1em;
+}
+
+.addUploaderOuter h1 {
+    font-size: 2.1em;
+}
+
+.addUploaderOuter .addUploaderMain form .container button {
     width: 100%;
     text-align: center;
     padding: 0.5em;
@@ -41,27 +45,23 @@
     color: white;
 }
 
-.addUserMain form * {
-    margin: 0.1em;
-}
-
-.addUserMain form .container * {
+.addUploaderMain form .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
-.addUserOuter * {
-    font-size: 1.1em;
-}
-
-.addUserOuter h1 {
-    font-size: 2.1em;
+.addUploaderMain form .container * {
+    width: 100%;
 }
 
 @media (max-width: 40em) {
-    .addUserMain {
+    .addUploaderMain {
         width: 95%;
     }
-    .addUserMain form {
+    .addUploaderMain form {
         width: 100%;
         padding: 0;
     }

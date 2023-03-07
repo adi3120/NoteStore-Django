@@ -107,6 +107,7 @@ body {
     align-self: flex-start;
     border: 0;
     margin: 0;
+    transition: 250ms;
 }
 
 @media (max-width: 40em) {

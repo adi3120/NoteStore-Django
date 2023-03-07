@@ -56,3 +56,13 @@
 .renameOrOuter h1 {
     font-size: 2.1em;
 }
+
+@media (max-width: 40em) {
+    .renameOrMain {
+        width: 95%;
+    }
+    .renameOrMain form {
+        width: 100%;
+        padding: 0;
+    }
+}

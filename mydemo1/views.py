@@ -94,6 +94,7 @@ def login(request):
             ln=t[0][2]
             global logged_in
             logged_in=True
+            # request.session['user_id'] = admin_id
 
             return render(request,"mydemo1/welcome.html",context={'fname':t[0][1],'lname':t[0][2],'logged_in':logged_in})
 
@@ -205,11 +206,23 @@ def addUserOr(request,pk):
 def addUploaderOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
+	global admin_id
+	global logged_in
+	c="select count(*) from organisation where id=%s and owner_id=%s"
+	vals=(pk,admin_id)
+	cursor.execute(c,vals)
+	isuploader=cursor.fetchall()
+	context={
+		'logged_in':logged_in,
+
+	}
+	if isuploader[0][0]==0:
+		return render(request,'mydemo1/nottheuploader.html',context=context)
 	if request.method=="POST":
 		d=request.POST
 		for key,value in d.items():
 			if(key=="user_id"):
-				c="insert into note_uploader values(%s,%s)"
+				c="insert into note_uploader(note_id,uploader_id) values(%s,%s)"
 				print(c)
 				vals=(pk,value)
 				cursor.execute(c,vals)
@@ -257,6 +270,7 @@ def renameOr(request,pk):
 
 	return render(request,'mydemo1/renameOr.html',context=context)
 
+@never_cache
 def deleteOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -275,7 +289,7 @@ def deleteOr(request,pk):
 	}
 	return render(request,'mydemo1/madeorganisation.html',context=context)
 
-
+@never_cache
 def uploadNotesOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -342,7 +356,7 @@ def uploadNotesOr(request,pk):
 		}
 		return render(request,"mydemo1/welcome.html",context=context)
 	return render(request,'mydemo1/uploadNotesOr.html',context=context)
-
+@never_cache
 def addPhotosNo(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -399,6 +413,16 @@ def addPhotosNo(request,pk):
 
 			cursor.execute(c,vals)
 			m.commit()
+		messages.success(request,"Photo Uploaded Successfully")
+		global fn,ln
+
+		context={
+			'fname':fn,
+			'lname':ln,
+			'logged_in':logged_in,
+		}
+		print(request.META.get('HTTP_REFERER'))
+		return render(request,"mydemo1/welcome.html",context=context)
 	context={
 		"note":pk,
 		'logged_in':logged_in,
@@ -407,7 +431,7 @@ def addPhotosNo(request,pk):
 
 
 	
-
+@never_cache
 def viewNotesOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -422,7 +446,7 @@ def viewNotesOr(request,pk):
 
 	return render(request,'mydemo1/viewNotesOr.html',context=context)
 
-
+@never_cache
 def visitNote(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -445,7 +469,7 @@ def visitNote(request,pk):
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
-
+@never_cache
 def deleteNote(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -476,6 +500,7 @@ def deleteNote(request,pk):
 
 	return render(request,'mydemo1/viewNotesOr.html',context=context)
 
+@never_cache
 def renameNo(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -515,7 +540,7 @@ def renameNo(request,pk):
 	}
 
 	return render(request,'mydemo1/renameNo.html',context=context)
-
+@never_cache
 def allUserOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
@@ -541,7 +566,7 @@ def allUserOr(request,pk):
 
 	return render(request,"mydemo1/allUserOr.html",context=context)
 	
-
+@never_cache
 def howtouse(request):
 	global logged_in
 	context={

@@ -1,13 +1,16 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Add Photos{% endblock title %} {% block addPhotoNo %}
 
-<div>
-    <form action="#" method="post" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="container">
-            <label for="upload"> Your file:</label>
-            <input type="file" name="upload" multiple="multiple"><br><br>
-            <button type="submit"><b>Create</b></button><br>
-        </div>
-    </form>
+<div class="renameOrOuter">
+    <h1>Add Photos</h1>
+    <div class="renameOrMain">
+        <form action="#" method="post" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container">
+                <label for="upload"> Your file:</label>
+                <input type="file" name="upload" multiple="multiple"><br><br>
+                <button type="submit"><b>Create</b></button><br>
+            </div>
+        </form>
+    </div>
 </div>
 {%endblock addPhotoNo%}

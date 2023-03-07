@@ -1,6 +1,13 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Error Signing In !{% endblock title %} {% block error %}
 
 <center>
-    <h1>Invalid Entry(-_-)!</h1>
+    <h1>Invalid login credentials!</h1>
+    <br>
+    <br>
+    <div style="background-color: rgba(255, 0, 0, 0.23);
+padding: 1em;border-radius: 1em; width:max-content;">
+        <h2>The username or password you entered is incorrect. Please try again.</h2>
+        <h2>Login Again</h2>
+    </div>
 </center>
 {%endblock error%}

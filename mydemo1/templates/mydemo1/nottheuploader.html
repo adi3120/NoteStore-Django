@@ -1,5 +1,40 @@
 {% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Not Allowed{% endblock title %} {% block nottheuploader %}
 
-<h1>YOU CANNOT UPLOAD</h1>
+<center>
+    <h1>YOU CANNOT MAKE CHANGES!</h1>
+
+</center>
+<div class="outerUploadError">
+
+    <div class="main">
+        <div class="item">
+
+            <h2>Reasons for this Error</h2>
+            <ul>
+                <li>
+                    <h4>You might be logged out because your session expired!!</h2>
+                </li>
+                <li>
+                    <h4>You are not allowed to make changes</h2>
+                </li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <h2>Following are some ways to fix this situation</h2>
+
+            <ul>
+                <li>
+                    <h4>Contact the Organisation's Administrator for required permissions</h2>
+                </li>
+                <li>
+                    <h4>Login Again and Try again</h2>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
 
 {%endblock nottheuploader%}
