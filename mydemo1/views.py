@@ -650,7 +650,6 @@ def deletePhoto(request,pk):
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
-<<<<<<< HEAD
 
 def removeUserOr(request,pk1,pk2):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
@@ -725,5 +724,3 @@ def leaveOrg(request,pk):
 		}
 
 		return render(request,'mydemo1/myorganisation.html',context=context)
-=======
->>>>>>> 1bb4771ddb9cfa846434fdd813d96a5b4481013e
