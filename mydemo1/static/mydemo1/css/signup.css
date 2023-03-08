@@ -66,4 +66,7 @@
         width: 100%;
         padding: 0;
     }
+    .outerregister .registermain form .container input {
+        font-size: medium;
+    }
 }

@@ -9,12 +9,13 @@
 			Go back
 		</a>
     </center> -->
-    <table border=1>
+    <table border=1 cellpadding="10">
         <tr>
             <th>ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email address</th>
+            <th>Actions</th>
         </tr>
         {%for i in users%}
         <tr>
@@ -30,7 +31,13 @@
             <td>
                 {{i.3}}
             </td>
+
+            <td>
+                <a id="rem" style="color:red;" href="{%url 'removeUserOr' pk1=i.0 pk2=org_id %}">Remove</a>
+            </td>
         </tr>
+
+
         {%endfor%}
     </table>
 </div>

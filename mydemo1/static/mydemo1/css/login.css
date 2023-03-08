@@ -59,4 +59,7 @@
     .loginmain form {
         width: 100%;
     }
+    .outerlogin .loginmain form .container input {
+        font-size: medium;
+    }
 }

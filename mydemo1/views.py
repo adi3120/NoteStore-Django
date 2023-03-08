@@ -11,6 +11,7 @@ from PIL import Image
 from django.views.decorators.cache import cache_control,never_cache
 from django.contrib.auth.decorators import login_required
 
+
 admin_id=0
 logged_in=False
 fn=''
@@ -204,17 +205,32 @@ def addUploaderOr(request,pk):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
 	cursor=m.cursor()
 	global admin_id
-	global logged_in
-	c="select count(*) from organisation where id=%s and owner_id=%s"
-	vals=(pk,admin_id)
+
+	print("Admin id : ",admin_id)
+	print("Note id : ",pk)
+
+	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
+	vals=(admin_id,pk)
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
-	context={
-		'logged_in':logged_in,
+	print("Is uploader : ",isuploader)
 
-	}
-	if isuploader[0][0]==0:
-		return render(request,'mydemo1/nottheuploader.html',context=context)
+	note_id=pk
+	c="select org_id from note where id="+str(note_id)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	org_id=x[0][0]
+	print("Org id: ",org_id)
+
+	c="select owner_id from organisation where id="+str(org_id)
+	cursor.execute(c)
+	x=cursor.fetchall()
+	owner_id=x[0][0]
+
+	print("Owner id: ",owner_id)
+
+	if isuploader[0][0]==0 and owner_id!=admin_id:
+		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 	if request.method=="POST":
 		d=request.POST
 		for key,value in d.items():
@@ -223,6 +239,15 @@ def addUploaderOr(request,pk):
 				vals=(pk,value)
 				cursor.execute(c,vals)
 				m.commit()
+				messages.success(request, 'Uploader Added successfully!')
+				global fn,ln
+
+				context={
+					'fname':fn,
+					'lname':ln,
+					'logged_in':logged_in,
+				}
+				return render(request,"mydemo1/welcome.html",context=context)
 	context={
 		'logged_in':logged_in,
 	}
@@ -549,10 +574,12 @@ def allUserOr(request,pk):
 	org_name=cursor.fetchall()
 	org_name=org_name[0][0]
 
+	org_id=pk
 	context={
 		'users':val,
 		'name':org_name,
 		'logged_in':logged_in,
+		"org_id":org_id,
 
 	}
 
@@ -623,3 +650,77 @@ def deletePhoto(request,pk):
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
+
+def removeUserOr(request,pk1,pk2):
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+	global logged_in
+
+	c="select owner_id from organisation where id="+str(pk2)
+	cursor.execute(c)
+
+	owner_id=cursor.fetchall()
+
+	if owner_id[0][0]!=admin_id:
+		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
+	else:
+		if owner_id[0][0]==pk1:
+
+			return render(request,"mydemo1/removeLeaveError.html",{'logged_in':logged_in})
+		else:
+			c="delete from user_org where orgid=%s and userid=%s"
+			vals=(pk2,pk1)
+			cursor.execute(c,vals)
+			m.commit()
+
+			c="select id,fname,lname,email from user where id in(select userid from user_org where orgid="+str(pk2)+")"
+			cursor.execute(c)
+			val=cursor.fetchall()
+
+			c="select name from organisation where id="+str(pk2)
+			cursor.execute(c)
+			org_name=cursor.fetchall()
+			org_name=org_name[0][0]
+
+			org_id=pk2
+			context={
+				'users':val,
+				'name':org_name,
+				'logged_in':logged_in,
+				"org_id":org_id,
+
+			}
+
+			return render(request,"mydemo1/allUserOr.html",context=context)
+
+		
+def leaveOrg(request,pk):
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+	global admin_id
+
+	c="select owner_id from organisation where id="+str(pk)
+	cursor.execute(c)
+
+	owner_id=cursor.fetchall()
+
+	if owner_id[0][0]==admin_id:
+		return render(request,'mydemo1/removeLeaveError.html',{'logged_in':logged_in})
+	else:
+		c="delete from user_org where userid=%s and orgid=%s"
+		vals=(admin_id,pk)
+
+		cursor.execute(c,vals)
+		m.commit()
+
+		c="select "
+
+		c="select * from organisation where id in(select orgid from user_org where userid="+str(admin_id)+")"
+		cursor.execute(c)
+		a=cursor.fetchall()
+		context={
+			'or':a,
+			'logged_in':logged_in,
+		}
+
+		return render(request,'mydemo1/myorganisation.html',context=context)

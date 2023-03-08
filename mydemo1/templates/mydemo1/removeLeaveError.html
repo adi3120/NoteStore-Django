@@ -1,0 +1,41 @@
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Not Allowed{% endblock title %} {% block removeLeaveError %}
+
+<center>
+    <h1 style="font-size: medium;">You cannot remove the admin of an organisation</h1>
+    <h1 style="font-size: medium;">You cannot leave the organisation if you're the admin</h1>
+
+</center>
+<div class="outerUploadError">
+
+    <div class="main">
+        <div class="item">
+
+            <h2>Removing/Leaving of admin can cause the following problems</h2>
+            <ul>
+                <li>
+                    <h4>As an organisation can have only 1 owner, removing or leaving of that owner will leave the organisation unmanagable</h2>
+                </li>
+                <li>
+                    <h4>This will cause integrity issues</h2>
+                </li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <h2>Following are some alternative ways</h2>
+
+            <ul>
+                <li>
+                    <h4>If you're the admin, you can delete this organisation</h2>
+                </li>
+                <li>
+                    <h4>Contact the database administrator to change the owner of this organisation</h2>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+
+{%endblock removeLeaveError%}

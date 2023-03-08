@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{% static 'mydemo1/css/howtouse.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/addUploaderOr.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/nottheuploader.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/error.css' %}">
 
 </head>
 
@@ -52,12 +53,12 @@
 
             <div class="right">
                 {%if logged_in%}
-                <b><a class="buttonCool" href="{% url 'welcome' %}">Home</a></b> {%else%}
-                <b><a class="buttonCool" href="{% url 'index' %}">Home</a></b> {%endif%}
-                <b><a class="buttonCool" href="{% url 'howtouse' %}">How to use</a></b> {%if logged_in%}
+                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'welcome' %}">Home</a></b> {%else%}
+                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'index' %}">Home</a></b> {%endif%}
+                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'howtouse' %}">How to use</a></b> {%if logged_in%}
 
                 <div class="options">
-                    <div class="opticontext buttonCool">
+                    <div class="opticontext buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;">
                         <b>Options</b>
                         <img src="{%static 'mydemo1/images/dropdown.png'%}" alt="">
                     </div>
@@ -68,9 +69,9 @@
                     </div>
                 </div>
 
-                <b><a class="buttonCool" href="{% url 'logout' %}">Logout</a></b> {%else%}
-                <b><a class="buttonCool" href="{% url 'signup' %}">Signup</a></b>
-                <b><a class="buttonCool" href="{% url 'login' %}">Login</a></b> {%endif%}
+                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'logout' %}">Logout</a></b> {%else%}
+                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'signup' %}">Signup</a></b>
+                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'login' %}">Login</a></b> {%endif%}
 
             </div>
             <div class="hamburger">
@@ -140,6 +141,9 @@
         </div>
         <div>
             {% block howtouse %} {%endblock howtouse%}
+        </div>
+        <div>
+            {% block removeLeaveError %} {%endblock removeLeaveError%}
         </div>
     </div>
 

@@ -62,6 +62,12 @@
     padding-top: 0.5em;
 }
 
+.madeorgmain .item .itemtext .options .leave {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: rgb(217, 15, 15);
+}
+
 @media (max-width: 40em) {
     .madeorgmain {
         grid-template-columns: 1fr;
