@@ -53,12 +53,12 @@
 
             <div class="right">
                 {%if logged_in%}
-                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'welcome' %}">Home</a></b> {%else%}
-                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'index' %}">Home</a></b> {%endif%}
-                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'howtouse' %}">How to use</a></b> {%if logged_in%}
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'welcome' %}">Home</a></b> {%else%}
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'index' %}">Home</a></b> {%endif%}
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'howtouse' %}">How to use</a></b> {%if logged_in%}
 
                 <div class="options">
-                    <div class="opticontext buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;">
+                    <div class="opticontext buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;">
                         <b>Options</b>
                         <img src="{%static 'mydemo1/images/dropdown.png'%}" alt="">
                     </div>
@@ -69,9 +69,9 @@
                     </div>
                 </div>
 
-                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'logout' %}">Logout</a></b> {%else%}
-                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'signup' %}">Signup</a></b>
-                <b><a class="buttonCool" style="outline:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'login' %}">Login</a></b> {%endif%}
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'logout' %}">Logout</a></b> {%else%}
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'signup' %}">Signup</a></b>
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'login' %}">Login</a></b> {%endif%}
 
             </div>
             <div class="hamburger">
