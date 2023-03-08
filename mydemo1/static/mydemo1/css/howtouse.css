@@ -1,60 +1,62 @@
-body {
-    width: 100vw;
-    overflow-x: hidden;
+.itemClick .hide {
+    display: none;
+    transition: all 0.3s ease;
+    transition: 250ms;
+    width: 100%;
+    border: 0.2em solid gold;
 }
 
-.howtouseouter {
+.itemClick {
+    transition: 250ms;
+    font-size: larger;
+    padding: 0.2em;
     width: 100%;
+}
+
+.helpMain {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    gap: 2em;
-}
-
-.howtouseouter .item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 1.5em;
     width: 100%;
-    justify-content: center;
-    /* outline: 0.2em solid rebeccapurple; */
+}
+
+.helpOuter {
+    padding: 2em;
+    width: 100%;
+}
+
+.itemClick .hide {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width: fit-content;
     padding: 1em;
     border-radius: 1em;
 }
 
-.howtouseouter .item .image {
+.itemClick .hide .hiddenlist {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3em;
+    gap: 0.5em;
+    margin-top: 1em;
 }
 
-.howtouseouter .item .text {
-    /* outline: 0.2em solid rebeccapurple; */
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 1em;
-    border-radius: 0.3em;
-    background-color: rgb(217, 217, 217);
-    margin: 1em;
-}
-
-.howtouseouter .item .image img {
-    /* outline: 0.2em solid rebeccapurple; */
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 1em;
-    border-radius: 1em;
-    max-width: 100vw;
-    height: auto;
+.itemClick:hover {
+    cursor: pointer;
+    width: max-content;
 }
 
 @media (max-width: 40em) {
-    .howtouseouter h1 {
-        font-size: large;
+    .helpOuter {
+        padding: 0;
+        float: left;
     }
-    .howtouseouter h2 {
-        font-size: medium;
+    .helpMain {
+        padding: 0.5em;
+    }
+    .itemClick .hide {
+        max-width: 16em;
+    }
+    .itemClick .hide {
+        padding: 0.3em;
     }
 }

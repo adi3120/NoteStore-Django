@@ -175,8 +175,10 @@ def madeorganisation(request):
 	cursor=m.cursor()
 	global admin_id
 	c="select * from organisation where owner_id="+str(admin_id)
+	print(c)
 	cursor.execute(c)
 	a=cursor.fetchall()
+	print(a)
 	context={
 		'a':a,
 		'logged_in':logged_in,

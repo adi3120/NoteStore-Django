@@ -9,10 +9,39 @@
                 <label for='note_name'><b>Title : </b></label>
                 <input type='text' placeholder="Enter note title" name='note_name' required><br><br>
                 <label for="upload"> Your file:</label>
-                <input type="file" name="upload" multiple="multiple"><br><br>
+                <input type="file" name="upload" multiple="multiple" id="image-upload"><br><br>
                 <button type="submit"><b>Create</b></button><br>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    const uploadField = document.getElementById("image-upload");
+
+
+    uploadField.onchange = function() {
+        const files = this.files;
+        const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+        const maxSize = 2097152; // 2MB in bytes
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const fileType = file.type;
+            const fileSize = file.size;
+
+            if (!validImageTypes.includes(fileType)) {
+                alert(`File ${file.name} is not a valid image file (GIF, JPEG, or PNG).`);
+                this.value = "";
+                return false;
+            }
+
+            if (fileSize > maxSize) {
+                alert(`File ${file.name} is larger than 2MB.`);
+                this.value = "";
+                return false;
+            }
+        }
+    };
+</script>
 {%endblock uploadNotesOr%}
