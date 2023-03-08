@@ -603,7 +603,7 @@ def deletePhoto(request,pk):
 	x=cursor.fetchall()
 	note_id=x[0][0]
 
-	print("Note ID: ",note_id)
+	#print("Note ID: ",note_id)
 
 	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
 	vals=(admin_id,note_id)
@@ -616,7 +616,7 @@ def deletePhoto(request,pk):
 	cursor.execute(c)
 	x=cursor.fetchall()
 	org_id=x[0][0]
-	print("Org ID: ",org_id)
+	#print("Org ID: ",org_id)
 
 
 	c="select owner_id from organisation where id="+str(org_id)
@@ -624,7 +624,7 @@ def deletePhoto(request,pk):
 	x=cursor.fetchall()
 	owner_id=x[0][0]
 
-	print("Owner ID: ",owner_id)
+	#print("Owner ID: ",owner_id)
 	if isuploader[0][0]==0 and owner_id!=admin_id:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
 
@@ -650,6 +650,7 @@ def deletePhoto(request,pk):
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
+<<<<<<< HEAD
 
 def removeUserOr(request,pk1,pk2):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
@@ -724,3 +725,5 @@ def leaveOrg(request,pk):
 		}
 
 		return render(request,'mydemo1/myorganisation.html',context=context)
+=======
+>>>>>>> 1bb4771ddb9cfa846434fdd813d96a5b4481013e
