@@ -45,6 +45,15 @@
     width: max-content;
 }
 
+.itemClick:hover>.itemClickText {
+    text-decoration-color: rgb(173, 173, 173);
+}
+
+.itemClickText {
+    text-decoration: underline;
+    transition: 0ms;
+}
+
 @media (max-width: 40em) {
     .helpOuter {
         padding: 0;

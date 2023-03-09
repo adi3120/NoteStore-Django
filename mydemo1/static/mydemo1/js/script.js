@@ -3,7 +3,7 @@ selectedCont = document.querySelector(".selectedPic")
 selectedCont = document.querySelector(".image")
 selectdImg = selectedCont.getElementsByTagName("img")
 let angle = 0
-
+    // imageSel = document.querySelector(".notePicOuter .selectedPic .image img")
 
 images = imageCont.querySelectorAll(".item")
 
@@ -14,8 +14,12 @@ images.forEach(element => {
             imgsrc = element.getElementsByTagName("img")
 
             selectdImg[0].src = imgsrc[0].src;
+            title = document.querySelector(".notePicOuter .selectedPic .topic h2");
+
+            title.innerHTML = "Topic: " + element.dataset.title;
             selectdImg[0].style.removeProperty('transform');
             angle = 0;
+            selectdImg[0].style.zIndex = -10000;
 
         }
     )
@@ -38,11 +42,10 @@ controls.forEach(element => {
                 ratio = selectdImg[0].offsetWidth / selectdImg[0].offsetHeight
                 if (angle % 180 == 0) {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + 'scale(1)'
-                    selectdImg[0].style.zIndex = -100;
                 } else {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + `scale(${1/ratio})`;
-                    selectdImg[0].style.zIndex = -100;
                 }
+
 
             } else {
                 angle = angle - 90;
@@ -51,14 +54,16 @@ controls.forEach(element => {
                 ratio = selectdImg[0].offsetWidth / selectdImg[0].offsetHeight
                 if (angle % 180 == 0) {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + 'scale(1)'
-                    selectdImg[0].style.zIndex = -100;
                 } else {
                     selectdImg[0].style.transform = `rotate(${(angle)%360}deg)` + `scale(${1/ratio})`
-                    selectdImg[0].style.zIndex = -100;
                 }
             }
+            selectdImg[0].style.zIndex = -1000;
+
         })
 })
+
+
 
 function scrollleft() {
 
@@ -70,3 +75,19 @@ function scrollright() {
     let myDiv = document.querySelector(".notePicOuter .notePicMain");
     myDiv.scrollLeft += 100; // change this value to adjust scroll amount
 }
+
+
+// imageSel = document.querySelector(".notePicOuter .selectedPic .image img")
+// console.log(imageSel)
+
+
+// function toggleFullscreen() {
+//     console.log("HELLO")
+//     if (!document.fullscreenElement) {
+//         document.querySelector(".notePicOuter .selectedPic .image img").requestFullscreen();
+//     } else {
+//         document.exitFullscreen();
+//     }
+// }
+
+// document.querySelector(".notePicOuter .selectedPic .image img").addEventListener('click', toggleFullscreen);

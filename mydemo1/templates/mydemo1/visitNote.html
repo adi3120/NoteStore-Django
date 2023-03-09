@@ -2,6 +2,9 @@
 <h5>Note : {{images.0.8}} | Organisation : {{images.0.5}}</h5>
 <div class="notePicOuter">
     <div class="selectedPic" id="selImgConMain">
+        <div class="topic">
+            <h2></h2>
+        </div>
         <div class="image">
             <img src="" alt="">
         </div>
@@ -20,7 +23,7 @@
     </div>
     <div class="notePicMain">
         {%for i in images%}
-        <div class="item" id="{{i.1}}">
+        <div class="item" id="{{i.1}}" data-title="{{i.2}}">
             <div class="pic">
                 <center>
                     <img src='data:image/jpeg;base64,{{i.0}}' alt="">
@@ -28,15 +31,20 @@
             </div>
             <div class="text">
                 <div>
-                    <h6>{{i.3}}</h6>
+                    <h6>Topic: {{i.2}}</h6>
                 </div>
                 <div>
-                    <h6>{{i.9}}</h6>
+                    <h6>On: {{i.3}}</h6>
                 </div>
-                <div class="options">
-                    <a href="{%url 'deletePhoto' pk=i.1%}">Delete</a>
+                <div>
+                    <h6>Email: {{i.9}}</h6>
+                </div>
+                <center>
+                    <div class="options">
+                        <a href="{%url 'deletePhoto' pk=i.1%}">Delete</a>
 
-                </div>
+                    </div>
+                </center>
             </div>
 
         </div>

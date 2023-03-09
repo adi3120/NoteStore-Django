@@ -29,15 +29,21 @@
     <link rel="stylesheet" href="{% static 'mydemo1/css/addUploaderOr.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/nottheuploader.css' %}">
     <link rel="stylesheet" href="{% static 'mydemo1/css/error.css' %}">
+    <link rel="stylesheet" href="{% static 'mydemo1/css/aboutUs.css' %}">
 
 </head>
 
 <body>
+    <div id="loader">
+        <img src="{%static 'mydemo1/images/loading.gif' %}" alt="">
+    </div>
+
     <script>
         let closeurl = "{% static 'mydemo1/images/close_hamburger.png' %}";
         let openurl = "{% static 'mydemo1/images/hamburger.png' %}";
         let dropdownurl = "{% static 'mydemo1/images/dropdown.png' %}";
         let dropupurl = "{% static 'mydemo1/images/dropup.png' %}";
+        let loaderURL = "{%static 'mydemo1/images/loading.gif' %}"
     </script>
     <div class="nav">
         {%if logged_in%}
@@ -55,7 +61,8 @@
                 {%if logged_in%}
                 <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'welcome' %}">Home</a></b> {%else%}
                 <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'index' %}">Home</a></b> {%endif%}
-                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'howtouse' %}">Help</a></b> {%if logged_in%}
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'howtouse' %}">Help</a></b>
+                <b><a class="buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;" href="{% url 'aboutUs' %}">About Us</a></b> {%if logged_in%}
 
                 <div class="options">
                     <div class="opticontext buttonCool" style="border:0.1em solid blue; color:darkblue; background-color:transparent;">
@@ -80,6 +87,7 @@
         </div>
 
     </div>
+
     <div class="content-area">
 
         <div>
@@ -145,7 +153,36 @@
         <div>
             {% block removeLeaveError %} {%endblock removeLeaveError%}
         </div>
+        <div>
+            {% block viewUploaders %} {%endblock viewUploaders%}
+        </div>
+        <div>
+            {% block aboutUs %} {%endblock aboutUs%}
+        </div>
     </div>
+
+    <!-- <script>
+        window.addEventListener('load', function() {
+            document.getElementById("loader").style.visibility = "hidden";
+        })
+
+        let thisnewloader = new Image();
+        thisnewloader.src = loaderURL;
+        loader.addEventListener("load", function() {
+            document.getElementById("loading").style.display = "block";
+        });
+    </script> -->
+    <script>
+        function showLoader() {
+            // Show the loader animation
+            document.getElementById("loader").style.display = "block";
+        }
+
+        function hideLoader() {
+            // Hide the loader animation
+            document.getElementById("loader").style.display = "none";
+        }
+    </script>
 
     <script src="{%static 'mydemo1/js/base.js' %}"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

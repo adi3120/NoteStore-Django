@@ -1,0 +1,177 @@
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}About Us{% endblock title %} {% block aboutUs %}
+
+
+<center>
+    <h1> About NoteStore </h1>
+</center>
+<br>
+
+
+<div class="aboutOuter">
+    <div class="main">
+        <div class="heading">
+            <h2>Our Mission</h2>
+        </div>
+        <div class="content">
+            <div class="text">
+                <ul>
+                    <li style="font-size:larger;">
+                        At <b>NoteStore</b>, our mission is to provide a powerful and flexible platform for <b>storing and sharing your notes as images</b>. We believe that organizing and managing your notes should be simple and intuitive, and that collaboration
+                        and sharing should be effortless.
+                    </li>
+
+                </ul>
+            </div>
+            <div class="image">
+                <img src="{%static 'mydemo1/images/NoteStoreLogo.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="heading">
+            <h2>Features of NoteStore</h2>
+        </div>
+        <div class="content">
+            <div class="image">
+                <img src="{%static 'mydemo1/images/features.webp' %}" alt="">
+            </div>
+            <div class="text">
+                <ul>
+
+                    <li>
+                        <b>Managebility: </b>You can create multiple organizations, each of which can contain multiple note folders and notes images. This allows you to easily organize your notes and images by project or topic.
+                    </li>
+                    <br>
+                    <li>
+                        <b>Shareability: </b>You can add other users to your organizations and give them access to specific note folders or notes images. This makes it easy to collaborate on projects or share information with colleagues, friends, or family
+                        members.
+                    </li>
+                    <br>
+
+                    <li>
+                        <b>Secure: </b>We are committed to providing a secure and reliable platform that you can trust to store your important notes and images. We use advanced security features like SSL/TLS encryption and role-based access control to
+                        protect your data and ensure that only authorized users have access to it.
+                    </li>
+                    <br>
+
+                    <li>
+                        <b>Fast: </b>Our platform is also designed to be fast and responsive, so you can easily access your notes and images from any device, whether you're at home, at work, or on the go.
+                    </li>
+                    <br>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="heading">
+            <h2>Our History</h2>
+        </div>
+        <div class="content">
+            <div class="text">
+                <ul>
+                    <li>
+                        <b>NoteStore</b> is Created by Team <b>NjEnX</b>. Our history began in Feb, 2023, when we heard about <b>Alibaba Global PolarDB hackathon</b> where we needed to submit a website made with using PolarDB as database which is highly
+                        advance DB, we had an Idea to create a platform that would make it easy and intuitive for users to organize and manage their notes and With <b>PolarDB</b> we thought Our Idea could become reality.
+                    </li>
+                    <br>
+
+                    <li>
+                        We started by identifying the pain points that many users experience when it comes to note-taking and organization. We knew that many <b>existing platforms were either too complex and feature-rich, or too simplistic and limited.</b>                        We wanted to create a platform that struck the right balance between functionality and ease of use.
+                    </li>
+                    <br>
+
+                    <li>
+                        Over the course of one month, we worked tirelessly to develop and refine our platform, drawing on our collective expertise in web development, design, and user experience. We tested and iterated on our design, incorporating feedback from early users to
+                        ensure that the platform met their needs and expectations.
+                    </li>
+                    <br>
+
+
+                    <li>
+                        As we look to the future, we remain committed to our founding principles of simplicity, flexibility, and security. We are excited to continue improving and evolving our platform, and we are grateful to our users for their ongoing support and feedback.
+                    </li>
+                    <br>
+
+
+                </ul>
+            </div>
+            <div class="image">
+                <img src="{%static 'mydemo1/images/history.webp' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="heading">
+            <center>
+                <h2>Our Team</h2>
+                <h1>Team NjEnX</h1>
+            </center>
+
+        </div>
+        <!-- <h3>At NoteStore, we have a small but dedicated team comprised of two members: Aditya Yadav and Ananya Karne.</h3>
+
+        <br> -->
+        <div class="teamcontent">
+            <div class="member">
+                <div class="image">
+                    <img src="{%static 'mydemo1/images/member1.png' %}" alt="">
+                </div>
+                <div class="text">
+                    <b>Aditya Yadav</b> is a skilled <b>full-stack developer</b> with expertise in frontend and backend development. He is pursuing a Bachelor's degree in Engineering from a well-known college and is passionate about developing responsive
+                    and user-friendly interfaces to improve the overall user experience.
+                </div>
+
+            </div>
+
+            <div class="member">
+                <div class="text">
+                    <b>Ananya Karne</b> is an experienced <b>frontend developer </b>with expertise in <b>database design</b> and <b>testing</b>. Currently pursuing a Bachelor's degree in Engineering, Ananya is committed to optimizing NoteStore's performance
+                    and reliability by focusing on detail-oriented database structure design and user-friendly frontend components.
+                </div>
+                <div class="image">
+                    <img src="{%static 'mydemo1/images/member2.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="heading">
+            <h2>Contact Us</h2>
+        </div>
+        <div class="contactContent">
+            <div class="item">
+                <div class="image">
+                    <img src="{%static 'mydemo1/images/call.jpg' %}" alt="">
+                </div>
+                <h3>Call </h3>
+
+                <div class="text">
+                    <b>Aditya Yadav</b> : +91-7879991408 <br> <b>Ananya Karne</b> : +91-94795 38955
+                </div>
+            </div>
+            <div class="item">
+                <div class="image">
+                    <img src="{%static 'mydemo1/images/form.jpg' %}" alt="">
+                </div>
+                <h3>Query Form</h3>
+                <div class="text">
+                    <form action="#" method="post">
+                        {% csrf_token %} {% load static %}
+                        <div class="container">
+
+                            <input type="email" placeholder="Enter email" name="email" float="right" required><br><br>
+
+                            <textarea id="query" name="query" rows="4" cols="50" placeholder="Enter your query"></textarea> <br>
+
+                            <button type="submit"><b>Send</b></button><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock aboutUs%}

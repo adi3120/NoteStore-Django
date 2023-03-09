@@ -20,11 +20,20 @@ rightOuter.addEventListener(
 				justify-content:space-evenly;
 				height:50vh;
 				margin-top:3em;
+				padding: 12em 0 12em 0;
 				border-radius:0 0 1em 1em;
 				border:1px solid black;
 				box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+				box-sizing: border-box;
 
     		`
+            innerthings = menu.querySelectorAll("b");
+            console.log(innerthings)
+            for (let i = 0; i < innerthings.length; i++) {
+                innerthings[i].style.cssText = `
+				box-sizing: border-box;
+				`
+            }
 
             document.querySelector(".rightOuter .hamburger img").src = closeurl;
 
@@ -33,6 +42,11 @@ rightOuter.addEventListener(
             menu.style.cssText = `
         		display:none;
     		`
+            innerthings = menu.querySelectorAll("b");
+
+            innerthings.style.cssText = `
+				padding:0em;
+			`
             document.querySelector(".rightOuter .hamburger img").src = openurl;
             options.querySelector(".dropdown-menu").style.display = "none"
         }

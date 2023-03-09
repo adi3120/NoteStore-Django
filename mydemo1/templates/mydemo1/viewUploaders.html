@@ -1,0 +1,64 @@
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}Uploaders{% endblock title %} {% block viewUploaders %}
+<style>
+    table {
+        width: 50%;
+        border-collapse: collapse;
+    }
+    
+    table th,
+    td,
+    tr {
+        padding: 1em;
+    }
+    
+    @media (max-width: 40em) {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th,
+        td,
+        tr {
+            padding: 0;
+        }
+    }
+</style>
+<div class="madeorgouter">
+    <h2>Uploaders of Note : {{note_name}}</h2>
+    <br>
+    <br>
+    <!-- <center>
+        <a href="{%url 'madeorganisation' %}">
+			Go back
+		</a>
+    </center> -->
+    <table border=1 cellpadding="2">
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email address</th>
+        </tr>
+        {%for i in uploaders%}
+        <tr>
+            <td>
+                {{i.0}}
+            </td>
+            <td>
+                {{i.1}}
+            </td>
+            <td>
+                {{i.2}}
+            </td>
+            <td>
+                {{i.3}}
+            </td>
+        </tr>
+
+
+        {%endfor%}
+    </table>
+</div>
+
+
+{%endblock viewUploaders%}

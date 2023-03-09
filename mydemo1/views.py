@@ -175,10 +175,8 @@ def madeorganisation(request):
 	cursor=m.cursor()
 	global admin_id
 	c="select * from organisation where owner_id="+str(admin_id)
-	print(c)
 	cursor.execute(c)
 	a=cursor.fetchall()
-	print(a)
 	context={
 		'a':a,
 		'logged_in':logged_in,
@@ -208,28 +206,23 @@ def addUploaderOr(request,pk):
 	cursor=m.cursor()
 	global admin_id
 
-	print("Admin id : ",admin_id)
-	print("Note id : ",pk)
 
 	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
 	vals=(admin_id,pk)
 	cursor.execute(c,vals)
 	isuploader=cursor.fetchall()
-	print("Is uploader : ",isuploader)
 
 	note_id=pk
 	c="select org_id from note where id="+str(note_id)
 	cursor.execute(c)
 	x=cursor.fetchall()
 	org_id=x[0][0]
-	print("Org id: ",org_id)
 
 	c="select owner_id from organisation where id="+str(org_id)
 	cursor.execute(c)
 	x=cursor.fetchall()
 	owner_id=x[0][0]
 
-	print("Owner id: ",owner_id)
 
 	if isuploader[0][0]==0 and owner_id!=admin_id:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
@@ -335,6 +328,8 @@ def uploadNotesOr(request,pk):
 		for key,value in d.items():
 			if key=="note_name":
 				note_name=value
+			if key=="image_name":
+				image_name=value
 		
 		files=request.FILES
 
@@ -364,7 +359,7 @@ def uploadNotesOr(request,pk):
 
 			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
 			
-			vals=("PIC1.jpeg",datetime_current,pk,admin_id,note_id,image)
+			vals=(image_name,datetime_current,pk,admin_id,note_id,image)
 
 			cursor.execute(c,vals)
 			m.commit()
@@ -407,6 +402,9 @@ def addPhotosNo(request,pk):
 
 	if request.method=="POST":
 		d=request.POST
+		for key,value in d.items():
+			if key=="image_name":
+				image_name=value
 		
 		files=request.FILES
 
@@ -430,7 +428,7 @@ def addPhotosNo(request,pk):
 
 			c="insert into photo(name,date_time,org_id,user_id,note_id,data) values(%s,%s,%s,%s,%s,%s)"
 			
-			vals=("PIC1.jpeg",datetime_current,org_id,admin_id,note_id,image)
+			vals=(image_name,datetime_current,org_id,admin_id,note_id,image)
 
 			cursor.execute(c,vals)
 			m.commit()
@@ -485,7 +483,6 @@ def visitNote(request,pk):
 	context={
 		'images':images_data,
 		'logged_in':logged_in,
-
 	}
 		
 	return render(request,'mydemo1/visitNote.html',context=context)
@@ -600,12 +597,13 @@ def deletePhoto(request,pk):
 	cursor=m.cursor()
 	global admin_id,logged_in
 
+
 	c="select note_id from photo where id="+str(pk)
 	cursor.execute(c)
 	x=cursor.fetchall()
 	note_id=x[0][0]
 
-	#print("Note ID: ",note_id)
+	# print("Note ID: ",note_id)
 
 	c="select count(*) from note_uploader where uploader_id=%s and note_id=%s"
 	vals=(admin_id,note_id)
@@ -634,24 +632,7 @@ def deletePhoto(request,pk):
 	c="delete from photo where id="+str(pk)
 	cursor.execute(c)
 	m.commit()
-	c="select photo.data,photo.id,photo.name,photo.date_time,photo.org_id,organisation.name,photo.user_id,photo.note_id,note.title,user.email from  photo,note,user,organisation where photo.note_id=note.id and photo.user_id=user.id and photo.org_id=organisation.id and note.id="+str(note_id)
-	cursor.execute(c)
-
-	images_data=cursor.fetchall()
-
-
-	for i in range(0,len(images_data)):
-		images_data[i]=list(images_data[i])
-		images_data[i][0]=b64encode(images_data[i][0]).decode("utf-8")
-
-	
-	context={
-		'images':images_data,
-		'logged_in':logged_in,
-
-	}
-		
-	return render(request,'mydemo1/visitNote.html',context=context)
+	return redirect('visitNote',pk=note_id)
 
 def removeUserOr(request,pk1,pk2):
 	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
@@ -726,3 +707,30 @@ def leaveOrg(request,pk):
 		}
 
 		return render(request,'mydemo1/myorganisation.html',context=context)
+
+def viewUploaders(request,pk):
+	m=sql.connect(host="ingeneors.rwlb.japan.rds.aliyuncs.com",user="adiuser1",passwd="MNMisBST@123",database='notestore')
+	cursor=m.cursor()
+
+	c="select * from user where id in(select uploader_id from note_uploader where note_id="+str(pk)+")"
+	cursor.execute(c)
+	uploaders=cursor.fetchall()
+
+	c="select title from note where id="+str(pk)
+	cursor.execute(c)
+	note_name=cursor.fetchall()
+
+	context={	
+		'uploaders':uploaders,
+		'logged_in':logged_in,
+		'note_name':note_name[0][0],
+
+	}
+	return render(request,"mydemo1/viewUploaders.html",context=context)
+
+def aboutUs(request):
+	global logged_in
+	context={
+		'logged_in':logged_in,
+	}
+	return render(request,"mydemo1/aboutUs.html",context=context)

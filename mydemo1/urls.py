@@ -17,12 +17,14 @@ urlpatterns = [
     
      
     path('howtouse', views.howtouse, name='howtouse'),
+    path('aboutUs', views.aboutUs, name='aboutUs'),
 
     path('user/organisation/addUserOr/<int:pk>', views.addUserOr, name='addUserOr'),
     path('user/organisation/allUserOr/<int:pk>', views.allUserOr, name='allUserOr'),
     path('user/organisation/removeUserOr/<int:pk1>/<int:pk2>', views.removeUserOr, name='removeUserOr'),
     
     path('user/organisation/note/addUploaderOr/<int:pk>', views.addUploaderOr, name='addUploaderOr'),
+    path('user/organisation/note/viewUploaders/<int:pk>', views.viewUploaders, name='viewUploaders'),
     path('user/organisation/note/addPhotosNo/<int:pk>', views.addPhotosNo, name='addPhotosNo'),
     path('user/organisation/note/renameNo/<int:pk>', views.renameNo, name='renameNo'), 
     path('user/organisation/note/deleteNote/<int:pk>', views.deleteNote, name='deleteNote'), 

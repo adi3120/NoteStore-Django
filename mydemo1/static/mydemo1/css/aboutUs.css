@@ -1,0 +1,166 @@
+.aboutOuter {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 2em;
+    height: 100%;
+}
+
+.aboutOuter li,
+.aboutOuter p,
+.aboutOuter ul {
+    font-size: large;
+}
+
+.aboutOuter .text {
+    font-size: larger;
+}
+
+.aboutOuter img {
+    border-radius: 2em;
+}
+
+.aboutOuter .main .heading {
+    padding: 1em;
+    padding-top: 0;
+}
+
+.aboutOuter .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    background-color: white;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.aboutOuter .main .content {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 1em;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.aboutOuter .main .content img {
+    height: 14em;
+    width: auto;
+    object-fit: cover;
+    padding: 1em;
+}
+
+.aboutOuter .main .content {
+    overflow: hidden;
+}
+
+.aboutOuter .main .content .text {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutOuter .main .contactContent {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 1em;
+    padding: 1em;
+    width: 100%;
+}
+
+.aboutOuter .main .contactContent .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+}
+
+.aboutOuter .main .teamcontent {
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    border-radius: 1em;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.aboutOuter .main .teamcontent .member {
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1em;
+    border-radius: 1em;
+    align-items: center;
+}
+
+
+/* .aboutOuter .main .teamcontent .member .image {
+    width: 25%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 2em;
+} */
+
+.aboutOuter .main .teamcontent .member .image img {
+    border-radius: 2em;
+    height: 14em;
+    width: auto;
+    object-fit: contain;
+    padding: 1em;
+}
+
+.aboutOuter .main .contactContent {
+    display: flex;
+}
+
+.aboutOuter .main .contactContent .item .text form .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.aboutOuter .main .contactContent .item {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.aboutOuter .main .contactContent .item .text form .container * {
+    width: 100%;
+    padding: 1em;
+}
+
+.aboutOuter .main .contactContent .item .text form .container button {
+    padding: 0.5em;
+    color: white;
+    background-color: blue;
+}
+
+@media (max-width: 40em) {
+    .aboutOuter .main .content {
+        flex-direction: column;
+    }
+    .aboutOuter .main {
+        width: 100%;
+    }
+    .aboutOuter {
+        align-items: center;
+    }
+    .aboutOuter .main .teamcontent .member {
+        flex-direction: column;
+        align-items: center;
+    }
+    .aboutOuter .main .contactContent {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+}
