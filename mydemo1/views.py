@@ -53,7 +53,8 @@ def signup(request):
             if key=="password":
                 pwd=value
         
-        c="insert into user(fname,lname,email,password) Values('{}','{}','{}','{}')".format(fn,ln,em,pwd)
+        c="insert into user(fname,lname,email,password) Values('{}','{}','{}',SHA2('{}',256))".format(fn,ln,em,pwd)
+        print(c)
         cursor.execute(c)
         m.commit()
         messages.success(request, 'Profile Created')
@@ -81,7 +82,7 @@ def login(request):
                 em=value
             if key=="password":
                 pwd=value
-        c="select * from user where email='{}' and password='{}'".format(em,pwd)
+        c="select * from user where email='{}' and password=SHA2('{}',256)".format(em,pwd)
         cursor.execute(c)
         t=tuple(cursor.fetchall())
 		
