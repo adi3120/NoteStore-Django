@@ -25,6 +25,12 @@
     padding-bottom: 0.5em;
 }
 
+.hoverButton:hover {
+    background-color: gold;
+    outline: 0.1em solid blue;
+    color: black;
+}
+
 @media (max-width: 40em) {
     .main {
         flex-direction: column-reverse;

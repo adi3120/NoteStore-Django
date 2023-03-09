@@ -7,11 +7,11 @@
             {% csrf_token %}
             <div class="container">
                 <label for='note_name'><b>Note Title : </b></label>
-                <input type='text' placeholder="Enter note title" name='note_name' required><br><br>
+                <input type='text' placeholder="Enter note title" name='note_name' maxlength="45" required><br><br>
                 <label for="upload"> Your file:</label>
-                <input type="file" name="upload" multiple="multiple" id="image-upload" required><br><br>
+                <input type="file" name="upload" multiple="multiple" id="image-upload"><br><br>
                 <label for='image_name'><b>Image(s) Title/Topic : </b></label>
-                <input type='text' placeholder="Enter Image(s) title" name='image_name' required><br><br>
+                <input type='text' placeholder="Enter Image(s) title" name='image_name'><br><br>
                 <button type="submit"><b>Create</b></button><br>
             </div>
         </form>

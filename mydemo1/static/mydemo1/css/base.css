@@ -105,10 +105,12 @@ body {
 }
 
 .buttonCool {
-    background-color: gold;
     padding: 0.5em;
     border-radius: 0.5em;
+    background-color: rgb(255, 136, 0);
     width: max-content;
+    color: black;
+    outline: 0.1em solid blue;
 }
 
 .buttonDrip {

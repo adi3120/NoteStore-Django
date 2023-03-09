@@ -193,6 +193,11 @@ def addUserOr(request,pk):
 		d=request.POST
 		for key,value in d.items():
 			if(key=="user_id"):
+				c="select count(*) from user where id="+str(value)
+				cursor.execute(c)
+				count=cursor.fetchall()
+				if count[0][0]==0:
+					return render(request,"mydemo1/userNotExist.html",{'logged_in':logged_in})
 				c="insert into user_org values(%s,%s)"
 				vals=(value,pk)
 				cursor.execute(c,vals)
@@ -231,6 +236,11 @@ def addUploaderOr(request,pk):
 		d=request.POST
 		for key,value in d.items():
 			if(key=="user_id"):
+				c="select count(*) from user where id="+str(value)
+				cursor.execute(c)
+				count=cursor.fetchall()
+				if count[0][0]==0:
+					return render(request,"mydemo1/userNotExist.html",{'logged_in':logged_in})
 				c="insert into note_uploader(note_id,uploader_id) values(%s,%s)"
 				vals=(pk,value)
 				cursor.execute(c,vals)
@@ -323,7 +333,7 @@ def uploadNotesOr(request,pk):
 	}
 	if isuploader[0][0]==0:
 		return render(request,'mydemo1/nottheuploader.html',context=context)
-
+	image_name="Image"
 	if request.method=="POST":
 		d=request.POST
 		for key,value in d.items():
@@ -400,7 +410,8 @@ def addPhotosNo(request,pk):
 	owner_id=x[0][0]
 	if isuploader[0][0]==0 and owner_id!=admin_id:
 		return render(request,'mydemo1/nottheuploader.html',{'logged_in':logged_in})
-
+	
+	image_name="Image"
 	if request.method=="POST":
 		d=request.POST
 		for key,value in d.items():

@@ -2,9 +2,11 @@
 <h5>Note : {{images.0.8}} | Organisation : {{images.0.5}}</h5>
 <div class="notePicOuter">
     <div class="selectedPic" id="selImgConMain">
-        <div class="topic">
-            <h2></h2>
-        </div>
+        <center>
+            <div class="topic">
+                <h2></h2>
+            </div>
+        </center>
         <div class="image">
             <img src="" alt="">
         </div>
@@ -17,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="helps">
+    <div class="helps" style="z-index:-1000;">
         <button class="leftscroll" onclick="scrollleft()">⇽ Scroll</button>
         <button class="rightscroll" onclick="scrollright()">Scroll ⇾</button>
     </div>
@@ -42,7 +44,6 @@
                 <center>
                     <div class="options">
                         <a href="{%url 'deletePhoto' pk=i.1%}">Delete</a>
-
                     </div>
                 </center>
             </div>

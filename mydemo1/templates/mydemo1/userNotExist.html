@@ -1,0 +1,12 @@
+{% extends 'mydemo1/base.html' %} {% load static %} {% block title %}User Doesn't Exist!{% endblock title %} {% block userNotExist %}
+
+<center>
+    <h1>User Doesn't Exist!</h1>
+    <br>
+    <br>
+    <div style="background-color: rgba(255, 0, 0, 0.23);
+padding: 1em;border-radius: 1em; width:max-content;">
+        <h2>The user id you entered doesn't exist. Please try again.</h2>
+    </div>
+</center>
+{%endblock userNotExist%}
