@@ -94,11 +94,12 @@ def login(request):
             admin_id=t[0][0]
             fn=t[0][1]
             ln=t[0][2]
+	    	
             global logged_in
             logged_in=True
             # request.session['user_id'] = admin_id
 
-            return render(request,"mydemo1/welcome.html",context={'fname':t[0][1],'lname':t[0][2],'logged_in':logged_in})
+            return render(request,"mydemo1/welcome.html",context={'fname':t[0][1],'lname':t[0][2],'logged_in':logged_in,"user_id":admin_id})
 
     return render(request,'mydemo1/login.html')
 
@@ -116,6 +117,7 @@ def welcome(request):
 		'fname':fn,
 		'lname':ln,
 		'logged_in':logged_in,
+		"user_id":admin_id,
 	}
 	return render(request,"mydemo1/welcome.html",context=context)
 
@@ -146,6 +148,7 @@ def createorganisation(request):
 			'fname':fn,
 			'lname':ln,
 			'logged_in':logged_in,
+			"user_id":admin_id,
 		}
 		messages.success(request, 'Organisation Created Successfully')
 		return render(request,"mydemo1/welcome.html",context=context)
@@ -252,6 +255,7 @@ def addUploaderOr(request,pk):
 					'fname':fn,
 					'lname':ln,
 					'logged_in':logged_in,
+					"user_id":admin_id,
 				}
 				return render(request,"mydemo1/welcome.html",context=context)
 	context={
@@ -382,6 +386,7 @@ def uploadNotesOr(request,pk):
 			'fname':fn,
 			'lname':ln,
 			'logged_in':logged_in,
+			"user_id":admin_id,
 		}
 		return render(request,"mydemo1/welcome.html",context=context)
 	return render(request,'mydemo1/uploadNotesOr.html',context=context)
@@ -451,6 +456,7 @@ def addPhotosNo(request,pk):
 			'fname':fn,
 			'lname':ln,
 			'logged_in':logged_in,
+			"user_id":admin_id,
 		}
 		return render(request,"mydemo1/welcome.html",context=context)
 	context={
